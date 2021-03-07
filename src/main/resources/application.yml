@@ -1,0 +1,5 @@
+## COMMON PROPERTIES
+spring:
+  profiles: dev
+
+## 시큐리티 설정
