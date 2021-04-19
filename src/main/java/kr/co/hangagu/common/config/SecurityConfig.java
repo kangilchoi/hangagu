@@ -39,11 +39,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
 		
         http.authorizeRequests()
-                .antMatchers("/member/**").authenticated()	//인증된 사용자만 요청가능	.hasRole("ADMIN")
-                .antMatchers("/admin/**").authenticated()
+        		.antMatchers("/admin/**").authenticated()	//인증된 사용자만 요청가능	ex : .hasRole("ADMIN")
+                .antMatchers("/member/**").authenticated()
+                .antMatchers("/cart/**").authenticated()
+                .antMatchers("/interestProduct/**").authenticated()
+                .antMatchers("/order/**").authenticated()
+                .antMatchers("/orderProduct/**").authenticated()
+                
                 .antMatchers("/**").permitAll()	//모든 사용자 요청가능
-        		.antMatchers("/common/**").permitAll();
+        		.antMatchers("/board/**").permitAll()
+        		.antMatchers("/product/**").permitAll()
+        		.antMatchers("/login/**").permitAll();
 
+        //custom login & logout
         http.formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/")
