@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.hangagu.biz.member.member.service.MemberService;
-import kr.co.hangagu.biz.vo.MemberTO;
+import kr.co.hangagu.biz.member.member.vo.Member;
 
 @Controller
 @RequestMapping(value = "/")
@@ -32,11 +32,11 @@ public class HomeController {
         return "pages/signup";
     }
 
-    @PostMapping("/signup")
-    public String signup(MemberTO memberTO) {
-        memberService.save(memberTO);
-        return "redirect:/login";
-    }
+//    @PostMapping("/signup")
+//    public String signup(Member member) {
+//        memberService.save(member);
+//        return "redirect:/login";
+//    }
 
     @PreAuthorize("hasRole('ROLE_MEMBER')")
     @GetMapping("/member/info")

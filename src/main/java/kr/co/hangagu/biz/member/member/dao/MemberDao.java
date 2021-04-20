@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import kr.co.hangagu.biz.vo.Member;
+import kr.co.hangagu.biz.member.member.entitiy.MemberEntity;
 
-public interface MemberDao extends JpaRepository<Member, Integer> {
-	Optional<Member> findByAccount(String account);
+public interface MemberDao extends JpaRepository<MemberEntity, Integer> {
+	Optional<MemberEntity> findByMemId(String memId);
 }
