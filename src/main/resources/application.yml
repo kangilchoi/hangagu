@@ -6,7 +6,7 @@ spring:
   ##DB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://52.79.242.115:3306/kangil_test?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://52.79.242.115:3306/hangagu?serverTimezone=UTC&characterEncoding=UTF-8
     username: kichoi
     password: Hangagu1!
 
@@ -15,8 +15,11 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-      format_sql: true
       ddl-auto: none
+      format_sql: true
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
 
 logging:
   level:
