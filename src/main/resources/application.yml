@@ -1,6 +1,7 @@
 ## COMMON PROPERTIES
 spring:
-  profiles: dev
+  profiles: 
+    active: dev
 
   ##DB
   datasource:
