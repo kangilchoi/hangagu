@@ -1,11 +1,12 @@
 package kr.co.hangagu.biz.member.product.service;
 
-import org.springframework.stereotype.Service;
 
-/**
- * ProductService
- * 제품 관련 서비스
- */
-@Service
-public class ProductService {
+import kr.co.hangagu.biz.member.product.vo.ProductVO;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ProductService {
+
+    public Optional<ProductVO> findByPmKey(String pmKey);
 }
