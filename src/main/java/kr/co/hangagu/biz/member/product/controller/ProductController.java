@@ -22,16 +22,8 @@ public class ProductController {
 
     @RequestMapping(value = "/{pmKey}", method = RequestMethod.GET)
     public @ResponseBody
-    ResultVO getProduct(@PathVariable("pmKey") String pmKey) {
-        ResultVO resultVO = new ResultVO();
-        Optional<ProductVO> productOpt = productService.findByPmKey(pmKey);
-        if(!productOpt.isPresent()) {
-            resultVO.setCode("9999");
-            resultVO.setMessage("데이터 없음");
-        } else {
-            resultVO.setData(productOpt.get());
-        }
-
+    ResultVO getProductByPmKey(@PathVariable("pmKey") String pmKey) {
+        ResultVO resultVO = productService.findByPmKey(pmKey);
         return resultVO;
     }
 

@@ -1,11 +1,12 @@
 package kr.co.hangagu.biz.common.code.service;
 
-import org.springframework.stereotype.Service;
+import kr.co.hangagu.biz.common.code.vo.CodeVO;
+import kr.co.hangagu.common.vo.ResultVO;
 
-/**
- * CodeService
- * 공통 코드 관련 서비스
- */
-@Service
-public class CodeService {
+import java.util.List;
+
+public interface CodeService {
+
+    public ResultVO findByCdClass(String cdClass);
+
 }
