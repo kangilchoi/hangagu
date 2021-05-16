@@ -1,11 +1,11 @@
 ## COMMON PROPERTIES
 spring:
   profiles: dev
-
+      
   ##DB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://52.79.242.115:3306/hangagu?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://13.209.96.119:3306/hangagu?serverTimezone=UTC&characterEncoding=UTF-8
     username: kichoi
     password: Hangagu1!
 
@@ -14,12 +14,15 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
       format_sql: true
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-
+    properties:
+      hibernate:
+#        dialect: kr.co.hangagu.common.config.CustomMysqlDialect
+        database-platform: org.hibernate.dialect.MySQL8Dialect
 logging:
   level:
     org:
@@ -30,3 +33,5 @@ logging:
             sql:
               BasicBinder: TRACE
 ## 시큐리티 설정
+
+

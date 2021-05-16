@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
         http.authorizeRequests()
         		.antMatchers("/admin/**").authenticated()	//인증된 사용자만 요청가능	ex : .hasRole("ADMIN")
-                .antMatchers("/member/**").authenticated()
+                //.antMatchers("/member/**").authenticated()
                 .antMatchers("/cart/**").authenticated()
                 .antMatchers("/interestProduct/**").authenticated()
                 .antMatchers("/order/**").authenticated()

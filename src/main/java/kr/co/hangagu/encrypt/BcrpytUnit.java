@@ -10,7 +10,7 @@ public class BcrpytUnit {
 
 	public static void encryptPw() {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String password ="123456";
+		String password ="1111";
 		String encryptPassword = passwordEncoder.encode(password);
 		System.out.println(encryptPassword);
 	}
