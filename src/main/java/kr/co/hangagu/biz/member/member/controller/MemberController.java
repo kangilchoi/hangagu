@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.co.hangagu.biz.member.member.service.MemberService;
 import kr.co.hangagu.biz.member.member.vo.Member;
 import kr.co.hangagu.biz.member.order.service.OrderService;
-import kr.co.hangagu.common.vo.ResultVo;
+import kr.co.hangagu.common.response.Response;
 
 /**
  * MemberController
@@ -36,7 +36,7 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/findId/{memMail}")
-	public ResultVo findIdByMail(@PathVariable String memMail) {
+	public Response findIdByMail(@PathVariable String memMail) {
     	return memberService.findIdByMail(memMail,'N');
 	}
     
@@ -46,7 +46,7 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/findPw/{memId}")
-	public ResultVo findPwById(@PathVariable String memId) {
+	public Response findPwById(@PathVariable String memId) {
     	return memberService.findPwById(memId,'N');
 	}
     
@@ -56,7 +56,7 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/dropMember/{memId}")
-	public ResultVo dropMember(@PathVariable String memId) {
+	public Response dropMember(@PathVariable String memId) {
     	return memberService.dropMember(memId,'Y');
 	}
     
@@ -66,7 +66,7 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/rollbackMember/{memId}")
-	public ResultVo rollbackMember(@PathVariable String memId) {
+	public Response rollbackMember(@PathVariable String memId) {
     	return memberService.rollbackMember(memId,'N');
 	}
     
@@ -76,7 +76,7 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/getMember/{memKey}")
-	public ResultVo getMember(@PathVariable String memKey) {
+	public Response getMember(@PathVariable String memKey) {
     	return memberService.getMember(memKey,'N');
 	}
     
@@ -86,7 +86,7 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/updateMember")
-	public ResultVo updateMember(@ModelAttribute Member member) {
+	public Response updateMember(@ModelAttribute Member member) {
     	return memberService.updateMember(member);
 	}
     
@@ -96,7 +96,7 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/signUp")
-	public ResultVo signUp(@ModelAttribute Member member) {
+	public Response signUp(@ModelAttribute Member member) {
     	return memberService.signUp(member);
 	}
     
@@ -106,7 +106,7 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/myPage/{memKey}")
-	public ResultVo myPage(@PathVariable String memKey) {
+	public Response myPage(@PathVariable String memKey) {
     	return orderService.myPage(memKey);
 	}
 }

@@ -1,18 +1,18 @@
-package kr.co.hangagu.common.vo;
+package kr.co.hangagu.common.response;
 
 import kr.co.hangagu.common.constants.HangaguConstant.Code;
 
-public class ResultVo {
+public class Response {
     private int code;
     private String message;
     private Object data;
     
     
-	public ResultVo() {
+	public Response() {
 		this.code = 0;
 	}
 
-	public ResultVo(int code, String message, Object data) {
+	public Response(int code, String message, Object data) {
 		super();
 		this.code = code;
 		this.message = message;

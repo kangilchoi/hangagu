@@ -28,7 +28,7 @@ import kr.co.hangagu.common.constants.HangaguConstant;
 import kr.co.hangagu.common.constants.HangaguConstant.Code;
 import kr.co.hangagu.common.constants.HangaguConstant.Role;
 import kr.co.hangagu.common.constants.HangaguConstant.Table;
-import kr.co.hangagu.common.vo.ResultVo;
+import kr.co.hangagu.common.response.Response;
 
 /**
  * MemberService
@@ -56,8 +56,8 @@ public class MemberService implements UserDetailsService {
     
     //회원가입
     @Transactional
-    public ResultVo signUp(Member member) {
-    	ResultVo resultVo = new ResultVo();
+    public Response signUp(Member member) {
+    	Response res = new Response();
 
          // 비밀번호 암호화
          BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -72,16 +72,16 @@ public class MemberService implements UserDetailsService {
 	         //insert
 	         member = memberDao.save(member);
 	         
-	         resultVo.setCode(1);
-	         resultVo.setData(member);
+	         res.setCode(1);
+	         res.setData(member);
          }
 
-         return resultVo;
+         return res;
     }
     
     //email로 ID찾기 -> email로 id전송
-    public ResultVo findIdByMail(String memMail,char DeleteYn) {
-    	ResultVo resultVo = new ResultVo();
+    public Response findIdByMail(String memMail,char DeleteYn) {
+    	Response res = new Response();
     	
     	//조회
     	List<Member> list = memberDao.findByMemMailAndDeleteYn(memMail,DeleteYn);
@@ -93,19 +93,19 @@ public class MemberService implements UserDetailsService {
         		ids.add(e.getMemId());
     		}
         	
-        	resultVo.setCode(Code.SUCCESS.getKey());
-        	resultVo.setData(ids);
+        	res.setCode(Code.SUCCESS.getKey());
+        	res.setData(ids);
     	}
     	
 
     	//email 발송
-    	return resultVo;
+    	return res;
     }
     
     //pw찾기
-    public ResultVo findPwById(String memId,char DeleteYn) {
+    public Response findPwById(String memId,char DeleteYn) {
     	String tempPw = "1234";
-    	ResultVo resultVo = new ResultVo();
+    	Response res = new Response();
     	
     	
     	//1. id로 멤버 조회
@@ -121,22 +121,22 @@ public class MemberService implements UserDetailsService {
     		member.setMemPw(passwordEncoder.encode(tempPw));
     		member = memberDao.save(member);
         	result = passwordEncoder.matches(tempPw, member.getMemPw()) ? Code.SUCCESS.getKey() : Code.FAIL.getKey();
-        	resultVo.setCode(result);
+        	res.setCode(result);
 
         	//3. email로 임시(변경된)pw 전송 
         	if(result == Code.SUCCESS.getKey()) {
         		
         	}
     	}else {
-    		resultVo.setMessage("Not found member");	//못찾은경우
+    		res.setMessage("Not found member");	//못찾은경우
     	}
     	
-    	return resultVo;
+    	return res;
     }
     
     //회원 탈퇴
-    public ResultVo dropMember(String memId,char DeleteYn) {
-    	ResultVo resultVo = new ResultVo();
+    public Response dropMember(String memId,char DeleteYn) {
+    	Response res = new Response();
     	
     	//1.조회
     	Optional<Member> memberWrapper = memberDao.findByMemIdAndDeleteYn(memId,'N');
@@ -149,14 +149,14 @@ public class MemberService implements UserDetailsService {
     		member.setDeleteYn(DeleteYn);
     		member = memberDao.save(member);
     		result = Character.compare(DeleteYn, member.getDeleteYn())==0 ? Code.SUCCESS.getKey() : Code.FAIL.getKey();
-    		resultVo.setCode(result);
+    		res.setCode(result);
     	}
-    	return resultVo;
+    	return res;
     }
     
     //회원 복구
-    public ResultVo rollbackMember(String memId,char DeleteYn) {
-    	ResultVo resultVo = new ResultVo();
+    public Response rollbackMember(String memId,char DeleteYn) {
+    	Response res = new Response();
     	
     	//1.조회
     	Optional<Member> memberWrapper = memberDao.findByMemIdAndDeleteYn(memId,'Y');
@@ -169,14 +169,14 @@ public class MemberService implements UserDetailsService {
     		member.setDeleteYn(DeleteYn);
     		member = memberDao.save(member);
     		result = Character.compare(DeleteYn, member.getDeleteYn())==0 ? Code.SUCCESS.getKey() : Code.FAIL.getKey();
-    		resultVo.setCode(result);
+    		res.setCode(result);
     	}
-    	return resultVo;
+    	return res;
     }
     
     //회원정보 조회
-	public ResultVo getMember(String memKey, char deleteN) {
-		ResultVo resultVo = new ResultVo();
+	public Response getMember(String memKey, char deleteN) {
+		Response res = new Response();
 		
 		//조회
 		Optional<Member> memberWrapper = memberDao.findByMemKeyAndDeleteYn(memKey,deleteN);
@@ -184,15 +184,15 @@ public class MemberService implements UserDetailsService {
 		if(memberWrapper.isPresent()) {
 			int result;
 			Member member = memberWrapper.get();
-			resultVo.setData(member);
+			res.setData(member);
 		}
 
-    	return resultVo;
+    	return res;
 	}
 	
 	//회원정보 수정
-	public ResultVo updateMember(Member member) {
-		ResultVo resultVo = new ResultVo();
+	public Response updateMember(Member member) {
+		Response res = new Response();
 		
 		//1.조회
 		Optional<Member> memberWrapper = memberDao.findByMemKeyAndDeleteYn(member.getMemKey(),'N');
@@ -200,11 +200,11 @@ public class MemberService implements UserDetailsService {
 		if(memberWrapper.isPresent()) {
 			//2.update
 			member = memberDao.save(member);
-			resultVo.setCode(1);
-			resultVo.setData(member);
+			res.setCode(1);
+			res.setData(member);
 		}
 
-    	return resultVo;
+    	return res;
 	}
 	
 }
