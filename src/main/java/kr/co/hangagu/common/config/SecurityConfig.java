@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
         http.authorizeRequests()
         		.antMatchers("/admin/**").authenticated()	//인증된 사용자만 요청가능	ex : .hasRole("ADMIN")
-                .antMatchers("/member/**").authenticated()
+                //.antMatchers("/member/**").authenticated()
                 .antMatchers("/cart/**").authenticated()
                 .antMatchers("/interestProduct/**").authenticated()
                 .antMatchers("/order/**").authenticated()
@@ -64,6 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         
         //권한이 없는 사용자 redirect 경로
         http.exceptionHandling().accessDeniedPage("/denied");
+        
+        http.csrf().disable();
     }
 
 	//AuthenticationManagerBuilder : 사용자 인증을 담당

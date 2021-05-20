@@ -1,33 +1,110 @@
 package kr.co.hangagu.biz.member.member.vo;
-import kr.co.hangagu.biz.member.member.entitiy.MemberEntity;
 
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name = "MEM_TB")
 public class Member {
 
+    
+	//@GeneratedValue(strategy = GenerationType.AUTO)	//4가지 있으나 함수사용으로 사용x
+	@Id
+    @Column(name="MEM_KEY", length = 8, nullable = false, unique = true)
     private String memKey;
-    private String memClass;
-    private String memId;
-    private String memPw;
-    private String memNm;
-    private String memAddr;
-    private String memDetailAddr;
-    private String memTel;
-    private String memPhone;
-    private String memMail;
-    private String memMailReceptYn;
-    private String memBirth;
-    private String memArea;
-    private String memGrade;
-    private String termsAgreeYn;
-    private String regDt;
-    private String regTm;
-    private String modDt;
-    private String modTm;
-    private String deleteYn;
 
-    public MemberEntity toEntity() {
-        return new MemberEntity(memKey, memClass, memId, memPw, memNm, memAddr, memDetailAddr, memTel, memPhone, memMail, memMailReceptYn, memBirth, memArea, memGrade, termsAgreeYn, regDt, regTm, modDt, modTm, deleteYn);
+    @Column(name="MEM_CLASS_CD", length = 8, nullable = false)
+    private String memClassCd;
+
+    @Column(name="MEM_ID", length = 16, nullable = false)
+    private String memId;
+
+    @Column(name="MEM_PW", length = 16, nullable = false)
+    private String memPw;
+    
+    @Column(name="MEM_NM", length = 32, nullable = false)
+    private String memNm;
+    
+    @Column(name="MEM_ADDR", length = 16, nullable = false)
+    private String memAddr;
+
+    @Column(name="MEM_DETAIL_ADDR", length = 256, nullable = false)
+    private String memDetailAddr;
+
+    @Column(name="MEM_TEL", length = 10, nullable = true)
+    private String memTel;
+    
+    @Column(name="MEM_PHONE", length = 13, nullable = false)
+    private String memPhone;
+    
+    @Column(name="MEM_MAIL", length = 64, nullable = false)
+    private String memMail;
+    
+    @Column(name="MEM_MAIL_RECEPT_YN", length = 1, nullable = false)
+    private char memMailReceptYn;
+    
+    @Column(name="MEM_BIRTH", length = 8, nullable = true)
+    private String memBirth;
+    
+    @Column(name="MEM_AREA", length = 8, nullable = true)
+    private String memArea;
+    
+    @Column(name="MEM_GRADE", length = 8, nullable = true)
+    private String memGrade;
+    
+    @Column(name="TERMS_AGREE_YN", length = 1, nullable = false)
+    private char termsAgreeYn;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name ="REG_DT", nullable = false)
+    private LocalDateTime regDt;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name ="MOD_DT", nullable = true)
+    private LocalDateTime modDt;
+
+    @Column(name="DELETE_YN", length = 1, nullable = false)
+    private char deleteYn;
+    
+    public Member() {
     }
+
+	
+
+	public Member(String memKey, String memClassCd, String memId, String memPw, String memNm, String memAddr,
+			String memDetailAddr, String memTel, String memPhone, String memMail, char memMailReceptYn,
+			String memBirth, String memArea, String memGrade, char termsAgreeYn, LocalDateTime regDt,
+			LocalDateTime modDt, char deleteYn) {
+		super();
+		this.memKey = memKey;
+		this.memClassCd = memClassCd;
+		this.memId = memId;
+		this.memPw = memPw;
+		this.memNm = memNm;
+		this.memAddr = memAddr;
+		this.memDetailAddr = memDetailAddr;
+		this.memTel = memTel;
+		this.memPhone = memPhone;
+		this.memMail = memMail;
+		this.memMailReceptYn = memMailReceptYn;
+		this.memBirth = memBirth;
+		this.memArea = memArea;
+		this.memGrade = memGrade;
+		this.termsAgreeYn = termsAgreeYn;
+		this.regDt = regDt;
+		this.modDt = modDt;
+		this.deleteYn = deleteYn;
+	}
+
+
 
 	public String getMemKey() {
 		return memKey;
@@ -37,12 +114,12 @@ public class Member {
 		this.memKey = memKey;
 	}
 
-	public String getMemClass() {
-		return memClass;
+	public String getMemClassCd() {
+		return memClassCd;
 	}
 
-	public void setMemClass(String memClass) {
-		this.memClass = memClass;
+	public void setMemClassCd(String memClassCd) {
+		this.memClassCd = memClassCd;
 	}
 
 	public String getMemId() {
@@ -109,11 +186,11 @@ public class Member {
 		this.memMail = memMail;
 	}
 
-	public String getMemMailReceptYn() {
+	public char getMemMailReceptYn() {
 		return memMailReceptYn;
 	}
 
-	public void setMemMailReceptYn(String memMailReceptYn) {
+	public void setMemMailReceptYn(char memMailReceptYn) {
 		this.memMailReceptYn = memMailReceptYn;
 	}
 
@@ -141,52 +218,44 @@ public class Member {
 		this.memGrade = memGrade;
 	}
 
-	public String getTermsAgreeYn() {
+	public char getTermsAgreeYn() {
 		return termsAgreeYn;
 	}
 
-	public void setTermsAgreeYn(String termsAgreeYn) {
+	public void setTermsAgreeYn(char termsAgreeYn) {
 		this.termsAgreeYn = termsAgreeYn;
 	}
 
-	public String getRegDt() {
-		return regDt;
-	}
-
-	public void setRegDt(String regDt) {
-		this.regDt = regDt;
-	}
-
-	public String getRegTm() {
-		return regTm;
-	}
-
-	public void setRegTm(String regTm) {
-		this.regTm = regTm;
-	}
-
-	public String getModDt() {
-		return modDt;
-	}
-
-	public void setModDt(String modDt) {
-		this.modDt = modDt;
-	}
-
-	public String getModTm() {
-		return modTm;
-	}
-
-	public void setModTm(String modTm) {
-		this.modTm = modTm;
-	}
-
-	public String getDeleteYn() {
+	public char getDeleteYn() {
 		return deleteYn;
 	}
 
-	public void setDeleteYn(String deleteYn) {
+	public void setDeleteYn(char deleteYn) {
 		this.deleteYn = deleteYn;
+	}
+
+
+
+	public LocalDateTime getRegDt() {
+		return regDt;
+	}
+
+
+
+	public void setRegDt(LocalDateTime regDt) {
+		this.regDt = regDt;
+	}
+
+
+
+	public LocalDateTime getModDt() {
+		return modDt;
+	}
+
+
+
+	public void setModDt(LocalDateTime modDt) {
+		this.modDt = modDt;
 	}
 
     

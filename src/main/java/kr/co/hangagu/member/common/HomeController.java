@@ -38,7 +38,7 @@ public class HomeController {
 //        return "redirect:/login";
 //    }
 
-    @PreAuthorize("hasRole('ROLE_MEMBER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/member/info")
     public String userInfoView() {
         return "pages/user_info";
