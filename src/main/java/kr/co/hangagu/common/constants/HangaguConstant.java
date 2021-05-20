@@ -120,4 +120,5 @@ public class HangaguConstant {
     		return this.value;
     	}
     }
+
 }

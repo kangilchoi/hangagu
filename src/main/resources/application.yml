@@ -3,7 +3,7 @@ spring:
   profiles: 
     active: dev
 
-  ##DB
+##DB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://13.209.96.119:3306/hangagu?serverTimezone=UTC&characterEncoding=UTF-8
