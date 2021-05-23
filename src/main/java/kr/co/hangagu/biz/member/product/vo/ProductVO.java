@@ -1,11 +1,13 @@
 package kr.co.hangagu.biz.member.product.vo;
 
+import kr.co.hangagu.common.vo.BaseVO;
+
 import javax.persistence.*;
 
 
 @Entity
 @Table(name = "PRODUCT_TB")
-public class ProductVO {
+public class ProductVO extends BaseVO {
 
     @Id
     @GeneratedValue
@@ -50,6 +52,9 @@ public class ProductVO {
 
     @Column(name = "MOD_EMP_KEY")
     private String modEmpKey;
+
+    @Column(name = "DELETE_YN")
+    private String deleteYn;
 
     public String getPmKey() {
         return pmKey;
@@ -161,5 +166,13 @@ public class ProductVO {
 
     public void setModEmpKey(String modEmpKey) {
         this.modEmpKey = modEmpKey;
+    }
+
+    public String getDeleteYn() {
+        return deleteYn;
+    }
+
+    public void setDeleteYn(String deleteYn) {
+        this.deleteYn = deleteYn;
     }
 }
