@@ -1,5 +1,7 @@
 package kr.co.hangagu.biz.member.order.service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -43,9 +45,9 @@ public class OrderService {
 		Response res = new Response();
 		
 		try {
-			Object[] orderList = orderDao.findAllOfOrder(memKey, deleteYn, odStatus);
+			List<Map<String, Object>> orderList = orderDao.findAllOfOrder(memKey, deleteYn, odStatus);
 			
-			if(orderList.length != 0) {
+			if(!orderList.isEmpty()) {
 				res.setCode(Code.SUCCESS.getKey());
 				res.setData(orderList);
 			} else {

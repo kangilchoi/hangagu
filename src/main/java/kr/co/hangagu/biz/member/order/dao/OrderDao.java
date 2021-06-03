@@ -1,5 +1,7 @@
 package kr.co.hangagu.biz.member.order.dao;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,9 +14,13 @@ import kr.co.hangagu.common.constants.HangaguConstant;
 public interface OrderDao extends JpaRepository<OrderEntity, Integer> {
 	@Query(nativeQuery = true, value="SELECT A.OD_PM_KEY, A.PM_KEY, A.PM_QUANTITY, "
 			+ "B.OD_KEY, B.MEM_KEY, B.OD_PRICE, B.DELIVERY_PRICE, "
-			+ "B.OD_STATUS FROM ORDER_PRODUCT_MNG_TB A JOIN ORDER_TB B ON A.OD_KEY = B.OD_KEY "
+			+ "B.OD_STATUS, C.PM_PRICE "
+			+ "FROM ORDER_PRODUCT_MNG_TB A JOIN ORDER_TB B "
+			+ "ON A.OD_KEY = B.OD_KEY "
+			+ "JOIN PRODUCT_TB C "
+			+ "ON C.PM_KEY = A.PM_KEY "
 			+ "WHERE B.MEM_KEY=:memKey AND A.DELETE_YN=:deleteYn AND B.OD_STATUS NOT IN (:odStatus)")
-	Object[] findAllOfOrder(@Param("memKey") String memKey, @Param("deleteYn") String deleteYn, @Param("odStatus") HangaguConstant.Oder odStatus);
+	List<Map<String, Object>> findAllOfOrder(@Param("memKey") String memKey, @Param("deleteYn") String deleteYn, @Param("odStatus") HangaguConstant.Oder odStatus);
 	
 	@Query(nativeQuery = true, value="SELECT sylim_test.make_key(:keyType)")
 	String makeKey(@Param("keyType") String keyType);
