@@ -19,7 +19,7 @@ public interface OrderDao extends JpaRepository<OrderEntity, Integer> {
 			+ "ON A.OD_KEY = B.OD_KEY "
 			+ "JOIN PRODUCT_TB C "
 			+ "ON C.PM_KEY = A.PM_KEY "
-			+ "WHERE B.MEM_KEY=:memKey AND A.DELETE_YN=:deleteYn AND B.OD_STATUS NOT IN (:odStatus)")
+			+ "WHERE B.MEM_KEY=:memKey AND A.DELETE_YN=:deleteYn AND B.OD_STATUS NOT IN (:odStatus) ORDER BY B.REG_DT DESC")
 	List<Map<String, Object>> findAllOfOrder(@Param("memKey") String memKey, @Param("deleteYn") String deleteYn, @Param("odStatus") HangaguConstant.Oder odStatus);
 	
 	@Query(nativeQuery = true, value="SELECT sylim_test.make_key(:keyType)")
