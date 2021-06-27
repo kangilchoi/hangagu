@@ -11,13 +11,13 @@ import kr.co.hangagu.biz.member.member.service.MemberService;
 import kr.co.hangagu.biz.member.member.vo.Member;
 
 @Controller
-@RequestMapping(value = "/")
+//@RequestMapping(value = "/")
 public class HomeController {
 
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("/")
+    //@GetMapping("/")
     public String homeView() {
         return "pages/home";
     }
