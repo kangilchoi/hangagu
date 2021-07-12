@@ -1,7 +1,6 @@
 package kr.co.hangagu.biz.member.product.service.impl;
 
 import kr.co.hangagu.biz.member.product.repository.ProductRepository;
-import kr.co.hangagu.biz.member.product.repository.ProductRepositorySupport;
 import kr.co.hangagu.biz.member.product.service.ProductService;
 import kr.co.hangagu.biz.member.product.vo.ProductVO;
 import kr.co.hangagu.common.vo.ResultVO;
@@ -21,18 +20,18 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private ProductRepositorySupport productRepositorySupport;
+//    @Autowired
+//    private ProductRepositorySupport productRepositorySupport;
 
     @Override
     public ResultVO findList(ProductVO vo) {
         ResultVO resultVO = new ResultVO();
 
         Map<String, Object> resultMap = new HashMap<>();
-        List<ProductVO> list = productRepositorySupport.selectProductList(vo);
+//        List<ProductVO> list = productRepositorySupport.selectProductList(vo);
 
-        resultMap.put("totalCount", list == null ? "0" : list.size());
-        resultMap.put("list", list);
+//        resultMap.put("totalCount", list == null ? "0" : list.size());
+//        resultMap.put("list", list);
         resultVO.setData(resultMap);
 
         return resultVO;
