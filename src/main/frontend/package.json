@@ -2,7 +2,6 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:8888",
   "dependencies": {
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
@@ -74,6 +73,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
+  "proxy": "http://localhost:8888",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -111,7 +111,7 @@
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "testEnvironment": "jsdom",
-    "testRunner": "D:\\sylim\\개발\\git\\hangagu\\src\\main\\frontend\\node_modules\\jest-circus\\runner.js",
+    "testRunner": "D:\\intellij\\hangagu\\src\\main\\frontend\\node_modules\\jest-circus\\runner.js",
     "transform": {
       "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
