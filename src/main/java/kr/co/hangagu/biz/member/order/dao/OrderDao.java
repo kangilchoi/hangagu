@@ -14,7 +14,7 @@ import kr.co.hangagu.common.constants.HangaguConstant;
 public interface OrderDao extends JpaRepository<OrderEntity, Integer> {
 	@Query(nativeQuery = true, value="SELECT A.OD_PM_KEY, A.PM_KEY, A.PM_QUANTITY, "
 			+ "B.OD_KEY, B.MEM_KEY, B.OD_PRICE, B.DELIVERY_PRICE, "
-			+ "B.OD_STATUS, C.PM_PRICE "
+			+ "B.OD_STATUS, C.PM_PRICE, C.PM_NM, B.REG_DT "
 			+ "FROM ORDER_PRODUCT_MNG_TB A JOIN ORDER_TB B "
 			+ "ON A.OD_KEY = B.OD_KEY "
 			+ "JOIN PRODUCT_TB C "
