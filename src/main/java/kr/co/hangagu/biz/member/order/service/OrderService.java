@@ -177,7 +177,7 @@ public class OrderService {
 	public Response myPage(String memKey) {
 		Response res = new Response();
 		
-		Optional<Object> o = orderDao.myPage(memKey);
+		Optional<List<Object>> o = orderDao.myPage(memKey);
 		
 		if(o.isPresent()) {
 			res.setCode(Code.SUCCESS.getKey());

@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	//WebSecurity : FilterChainProxy를 생성하는 필터(Spring Security에서 해당 요청은 인증 대상에서 제외)
 	@Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/component/**");
     }
 	//HttpSecurity : HTTP 요청에 대한 보안을 설정
 	@Override
@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/**").permitAll()	//모든 사용자 요청가능
         		.antMatchers("/board/**").permitAll()
         		.antMatchers("/product/**").permitAll()
-        		.antMatchers("/login/**").permitAll();
+        		.antMatchers("/login/**").permitAll()
+        		.antMatchers("/component/**").permitAll();
 
         //custom login & logout
         http.formLogin()

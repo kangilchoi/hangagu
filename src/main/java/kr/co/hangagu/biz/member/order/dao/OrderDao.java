@@ -40,6 +40,6 @@ public interface OrderDao extends JpaRepository<OrderEntity, Integer> {
 		 + "where MEM_KEY = :memKey "
 		 + "and IFNULL(MOD_DT,REG_DT) >= DATE_ADD(NOW(), INTERVAL -3 MONTH) "
 		 + "group by OD_STATUS")
-    Optional<Object> myPage(@Param("memKey") String memKey);
+	Optional<List<Object>> myPage(@Param("memKey") String memKey);
 }
 
