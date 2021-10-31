@@ -1,4 +1,6 @@
-package kr.co.hangagu.member.common;
+package kr.co.hangagu.common.controller;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,17 +13,21 @@ import kr.co.hangagu.biz.member.member.service.MemberService;
 import kr.co.hangagu.biz.member.member.vo.Member;
 
 @Controller
-//@RequestMapping(value = "/")
+@RequestMapping(value = "/")
 public class HomeController {
 
     @Autowired
     private MemberService memberService;
 
-    //@GetMapping("/")
-    public String homeView() {
-        return "pages/home";
+    @GetMapping("/")
+    public String homeView(HttpServletRequest request) {
+        return "main";
     }
 
+    
+    
+    
+    
     @GetMapping("/login")
     public String loginView() {
         return "pages/login";
