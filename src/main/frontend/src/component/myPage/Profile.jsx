@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 /*css*/
-import "css/common.css"
 import "css/myPage/memberModify.css"
 
 

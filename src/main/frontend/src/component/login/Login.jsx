@@ -1,5 +1,4 @@
 /*css*/
-import "css/common.css"
 import "css/login/login.css"
 
 
