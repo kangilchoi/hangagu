@@ -31,6 +31,8 @@ dependencies {
 	//querydsl
 	implementation 'com.querydsl:querydsl-jpa'
 	
+	//email sender
+	implementation 'com.sun.mail:javax.mail'
 }
 
 def querydslDir = "$buildDir/generated/querydsl"

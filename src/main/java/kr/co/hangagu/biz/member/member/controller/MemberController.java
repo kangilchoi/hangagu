@@ -1,8 +1,5 @@
 package kr.co.hangagu.biz.member.member.controller;
 
-
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,13 +38,23 @@ public class MemberController {
 	}
     
     /**
-     * id로 pw찾기 -> 임시pw로 변경후 이메일로 임시pw 알려주기
+     * id로 pw찾기 -> 일치여부
      * @param memId
      * @return
      */
-    @GetMapping(value = "/findPw/{memId}")
-	public Response findPwById(@PathVariable String memId) {
-    	return memberService.findPwById(memId,'N');
+    @GetMapping(value = "/isCorrectPwById/{memId}")
+	public Response findPwById(@PathVariable String memId, String memPw) {
+    	return memberService.isCorrectPwById(memId,memPw,'N');
+	}
+    
+    /**
+     * id로 pw변경
+     * @param memId
+     * @return
+     */
+    @GetMapping(value = "/updatePwById/{memId}")
+	public Response updatePwById(@PathVariable String memId, String memPw) {
+    	return memberService.updatePwById(memId,memPw,'N');
 	}
     
     /**
@@ -55,9 +62,9 @@ public class MemberController {
      * @param memId
      * @return
      */
-    @GetMapping(value = "/dropMember/{memId}")
-	public Response dropMember(@PathVariable String memId) {
-    	return memberService.dropMember(memId,'Y');
+    @GetMapping(value = "/dropMember/{memKey}")
+	public Response dropMember(@PathVariable String memKey) {
+    	return memberService.dropMember(memKey,'Y');
 	}
     
     /**
@@ -76,8 +83,18 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/getMember/{memKey}")
-	public Response getMember(@PathVariable String memKey) {
+	public Response getMemberByKey(@PathVariable String memKey) {
     	return memberService.getMember(memKey,'N');
+	}
+    
+    /**
+     * 회원정보 조회
+     * @param memKey
+     * @return
+     */
+    @GetMapping(value = "/getMemberById/{memId}")
+	public Response getMemberById(@PathVariable String memId) {
+    	return memberService.getMemberById(memId,'N');
 	}
     
     /**
@@ -105,7 +122,17 @@ public class MemberController {
      * @param memKey
      * @return
      */
-    @GetMapping(value = "/myPage/{memKey}")
+    @GetMapping(value = "/verifyEmail/{memMail}")
+	public Response verifyEmail(@PathVariable String memMail) {
+    	return memberService.verifyEmail(memMail);
+	}
+    
+    /**
+     * 마이페이지(주문내역)
+     * @param memKey
+     * @return
+     */
+    @GetMapping(value = "/l/{memKey}")
 	public Response myPage(@PathVariable String memKey) {
     	return orderService.myPage(memKey);
 	}

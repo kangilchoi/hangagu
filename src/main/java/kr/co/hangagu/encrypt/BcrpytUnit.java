@@ -10,9 +10,10 @@ public class BcrpytUnit {
 
 	public static void encryptPw() {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String password ="1111";
+		String password ="a123456";
 		String encryptPassword = passwordEncoder.encode(password);
 		System.out.println(encryptPassword);
+		System.out.println(passwordEncoder.matches(password,"$2a$10$e9kpmbBNLdLJNRIle.9feOtN.MAN6Q90g5dvYp/eM.Yvw.leBpcNO"));
 	}
 	
 	public static void main(String[] args) {

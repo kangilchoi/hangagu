@@ -102,44 +102,108 @@ public class MemberService implements UserDetailsService {
     	return res;
     }
     
-    //pw찾기
-    public Response findPwById(String memId,char DeleteYn) {
-    	String tempPw = "1234";
+    //pw 일치여부
+    public Response isCorrectPwById(String memId, String memPw, char DeleteYn) {
     	Response res = new Response();
     	
     	
     	//1. id로 멤버 조회
     	Optional<Member> memberWrapper = memberDao.findByMemIdAndDeleteYn(memId,DeleteYn);
     	
-    	//2. pw 임시변경
+    	//2. pw 일치여부
     	if(memberWrapper.isPresent()) {
     		int result;
     		Member member = memberWrapper.get();
     		
     		//암호화 & 변경
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    		member.setMemPw(passwordEncoder.encode(tempPw));
-    		member = memberDao.save(member);
-        	result = passwordEncoder.matches(tempPw, member.getMemPw()) ? Code.SUCCESS.getKey() : Code.FAIL.getKey();
+        	result = passwordEncoder.matches(memPw, member.getMemPw()) ? Code.SUCCESS.getKey() : Code.FAIL.getKey();
         	res.setCode(result);
 
-        	//3. email로 임시(변경된)pw 전송 
-        	if(result == Code.SUCCESS.getKey()) {
-        		
-        	}
     	}else {
+    		res.setCode(Code.FAIL.getKey());
     		res.setMessage("Not found member");	//못찾은경우
     	}
     	
     	return res;
     }
     
+    //pw 변경
+    public Response updatePwById(String memId, String memPw, char deleteYn) {
+    	Response res = new Response();
+    	
+    	
+    	//1. id로 멤버 조회
+    	Optional<Member> memberWrapper = memberDao.findByMemIdAndDeleteYn(memId,deleteYn);
+    	
+    	if(memberWrapper.isPresent()) {
+    		int result;
+    		Member member = memberWrapper.get();
+    		//암호화 & 변경
+    		//2. pw 일치여부
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encryptPw = passwordEncoder.encode(memPw);
+
+            if(passwordEncoder.matches(memPw, member.getMemPw())) {
+            	result = Code.FAIL.getKey();
+            	res.setMessage("pw가 일치합니다.");
+            }else {
+            	member.setMemPw(encryptPw);
+            	member.setModDt(LocalDateTime.now());
+            	//3.update
+    			member = memberDao.save(member);
+    			res.setData(member);
+            	result = Code.SUCCESS.getKey();
+            }
+        	res.setCode(result);
+
+    	}else {
+    		res.setCode(Code.FAIL.getKey());
+    		res.setMessage("Not found member");	//못찾은경우
+    	}
+    	
+    	return res;
+    }
+    
+    //pw찾기
+    public Response verifyEmail(String memMail) {
+    	String authCode = "1234";
+    	Response res = new Response();
+    	
+    	
+    	//1. id로 멤버 조회
+//    	Optional<Member> memberWrapper = memberDao.findByMemIdAndDeleteYn(memId,DeleteYn);
+    	
+    	
+    	//2. pw 임시변경
+//    	if(memberWrapper.isPresent()) {
+//    		int result;
+//    		Member member = memberWrapper.get();
+//    		
+//    		//암호화 & 변경
+//            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//    		member.setMemPw(passwordEncoder.encode(tempPw));
+//    		member = memberDao.save(member);
+//        	result = passwordEncoder.matches(tempPw, member.getMemPw()) ? Code.SUCCESS.getKey() : Code.FAIL.getKey();
+//        	res.setCode(result);
+//
+//        	//3. email로 임시(변경된)pw 전송 
+//        	if(result == Code.SUCCESS.getKey()) {
+//        		
+//        	}
+//    	}else {
+//    		res.setMessage("Not found member");	//못찾은경우
+//    	}
+    	
+    	return res;
+    }
+    
     //회원 탈퇴
-    public Response dropMember(String memId,char DeleteYn) {
+    public Response dropMember(String memKey,char DeleteYn) {
     	Response res = new Response();
     	
     	//1.조회
-    	Optional<Member> memberWrapper = memberDao.findByMemIdAndDeleteYn(memId,'N');
+    	Optional<Member> memberWrapper = memberDao.findByMemKeyAndDeleteYn(memKey,'N');
     	
     	if(memberWrapper.isPresent()) {
     		int result;
@@ -147,9 +211,13 @@ public class MemberService implements UserDetailsService {
 
     		//2.변경
     		member.setDeleteYn(DeleteYn);
+    		member.setModDt(LocalDateTime.now());
     		member = memberDao.save(member);
     		result = Character.compare(DeleteYn, member.getDeleteYn())==0 ? Code.SUCCESS.getKey() : Code.FAIL.getKey();
     		res.setCode(result);
+    	}else {
+    		res.setCode(Code.FAIL.getKey());
+    		res.setMessage("Not found member");	//못찾은경우
     	}
     	return res;
     }
@@ -167,10 +235,14 @@ public class MemberService implements UserDetailsService {
 
     		//2.변경
     		member.setDeleteYn(DeleteYn);
+    		member.setModDt(LocalDateTime.now());
     		member = memberDao.save(member);
     		result = Character.compare(DeleteYn, member.getDeleteYn())==0 ? Code.SUCCESS.getKey() : Code.FAIL.getKey();
     		res.setCode(result);
-    	}
+    	}else {
+			res.setCode(Code.FAIL.getKey());
+    		res.setMessage("Not found member");	//못찾은경우
+		}
     	return res;
     }
     
@@ -182,10 +254,31 @@ public class MemberService implements UserDetailsService {
 		Optional<Member> memberWrapper = memberDao.findByMemKeyAndDeleteYn(memKey,deleteN);
 
 		if(memberWrapper.isPresent()) {
-			int result;
 			Member member = memberWrapper.get();
 			res.setData(member);
+			res.setCode(Code.SUCCESS.getKey());
+		}else {
+			res.setCode(Code.FAIL.getKey());
 		}
+
+    	return res;
+	}
+	
+	//회원정보 조회
+	public Response getMemberById(String memId, char deleteN) {
+		Response res = new Response();
+		
+		//조회
+		Optional<Member> memberWrapper = memberDao.findByMemIdAndDeleteYn(memId,deleteN);
+
+		if(memberWrapper.isPresent()) {
+			Member member = memberWrapper.get();
+			if(null != member)
+				res.setCode(Code.SUCCESS.getKey());
+			else
+				res.setCode(Code.FAIL.getKey());
+		}else
+			res.setCode(Code.FAIL.getKey());
 
     	return res;
 	}
@@ -200,8 +293,12 @@ public class MemberService implements UserDetailsService {
 		if(memberWrapper.isPresent()) {
 			//2.update
 			member = memberDao.save(member);
-			res.setCode(1);
+			member.setModDt(LocalDateTime.now());
+			res.setCode(Code.SUCCESS.getKey());
 			res.setData(member);
+		}else {
+			res.setCode(Code.FAIL.getKey());
+    		res.setMessage("Not found member");	//못찾은경우
 		}
 
     	return res;

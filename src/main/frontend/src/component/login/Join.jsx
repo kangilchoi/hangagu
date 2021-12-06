@@ -1,30 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
+import Rules from "component/login/Rules";
 import PopupDom from 'component/PopupDom';
 import PopupPostCode from 'component/PopupPostCode';
-import { Link } from 'react-router-dom'
 
 /*css*/
-import "css/myPage/memberModify.css"
+import "css/login/join.css"
+import "css/common.css"
 
 /*js*/
 
 /*img*/
 import red_dot from "img/red_dot.gif"
 import addr_api from "img/addr_api.gif"
+import naver_login from "img/login_btn_naver.png"
+//import naver_login from "img/naver.webp"
 
-
-function Profile(){
-    //조회, 변경 화면 변수
-    const [isUpdate,setIsUpdate] = useState(false);
+function Join(){
     // 팝업창 상태 관리
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isEmailPopOpen, setIsEmailPopOpen] = useState(false);
+    
+    const [isEmailChk, setIsEmailChk] = useState(false);
+    const [authCode, setAuthCode] = useState('');
 
     const [member, setMember] = useState({
-        memKey:'MK210004',
+        memKey:null,
         memClassCd:null,
-        memId:null,
-        memPw:null,
+        memId:'',
+        memPw:'',
+        memPw2:'',
         memNm:null,
         memBirth:null,
         memAddr:null,
@@ -38,58 +43,33 @@ function Profile(){
         regDt:null,
         modDt:null,
         deleteYn:null,
+        temrsAgreeYn:null
     });
 
-    const [validation, setValidate] = useState({
-        memClassCd:true,
+    const [validation, setValidation] = useState({
         memId:true,
         memPw:true,
+        memPw2:true,
         memNm:true,
         memBirth:true,
-        memAddr:true,
-        memDetailAddr:true,
         memPhone:true,
         memTel:true,
-        memMail:true,
-        memMailReceptYn:true,
+        memMail:true
     });
-    
+
     // 비구조화 할당을 통해 값 추출
-    const {memKey,memClassCd,memId,memPw,memNm,memBirth,memAddr,memDetailAddr,memPhone,memTel,memMail,memMailReceptYn,modDt} = member; 
-    const {memClassCdV,memIdV,memPwV,memNmV,memBirthV,memAddrV,memDetailAddrV,memPhoneV,memTelV,memMailV,memMailReceptYnV} = validation; 
+    const {memKey,memClassCd,memId,memPw,memPw2,memNm,memBirth,memAddr,memDetailAddr,memPhone,memTel,memMail,memMailReceptYn,memArea,memGrade,regDt,modDt,deleteYn,temrsAgreeYn} = member;
+    const {memIdV,memPwV,memPw2V,memNmV,memBirthV,memPhoneV,memTelV,memMailV} = validation;
 
     //Hook(useEffect) : 컴포넌트 랜더링마다 실행
     useEffect(() => {
-        fetchMember();
+
     },[]);
 
-    const setInfo = (data) => {
-        setMember({
-            memKey:'MK210004',
-            memClassCd:data.memClassCd,
-            memId:data.memId,
-            memPw:data.memPw,
-            memNm:data.memNm,
-            memBirth:data.memBirth,
-            memAddr:data.memAddr,
-            memDetailAddr:data.memDetailAddr,
-            memPhone:data.memPhone,
-            memTel:data.memTel,
-            memMail:data.memMail,
-            memMailReceptYn:data.memMailReceptYn,
-            memArea:data.memArea,
-            memGrade:data.memGrade,
-            regDt:data.regDt,
-            modDt:data.modDt,
-            deleteYn:data.deleteYn
-        });
-    }
     const onChange = (e) => {
         let type = e.target.name;
         let value = e.target.value;
-        
-        //수정상태에서만 사용
-        if(!isUpdate) return false;
+    
 
         //주소 api형태로만 변경 가능
         if(type === 'memAddr') return false;
@@ -100,25 +80,22 @@ function Profile(){
         });
         
         let validVal = validate(type,value);
-
-        setValidate({
+        
+        setValidation({
             ...validation, // 기존의 객체를 복사한 뒤
             [type+'V']: validVal // type 키를 가진 값을 value 로 설정
         });
     };
-    
-      // 팝업창 열기
+
+    // 팝업창 열기
     const openPostCode = () => {
-        if(isUpdate){
-            setIsPopupOpen(true);
-        }
+            setIsEmailPopOpen(true);
     }
  
 	// 팝업창 닫기
     const closePostCode = () => {
-        setIsPopupOpen(false);
+        setIsEmailPopOpen(false);
     }
-
 
     //input별 유효성 체크
     const validate = (type,val) => {
@@ -132,9 +109,61 @@ function Profile(){
             res = checkMemPhoneNumber(val);
         }else if(type === 'memTel'){
             res = checkMemTel(val);
+        }else if(type === 'memPw'){
+            res = checkValidPw(val);
+        }else if(type === 'memPw2'){
+            res = checkSamePw(memPw,val);
         }
 
         return res;
+    }
+
+    const checkSamePw = (pw1,pw2) => {
+        if(pw1===pw2) return true 
+        else return false;
+    }
+
+    const authEmail = async() => {
+        try{
+            const response = await axios.get('http://localhost:8888/member/getMemberById/'+memId);
+            console.log(response.data.code);
+            if(response.data.code < 0){
+                alert('사용 가능한 ID입니다.');
+            }else{
+                alert('중복 ID가 있습니다.');
+                return(
+                    <div>error</div>
+                )
+            }
+        } catch (e) {
+        console.log(e);
+        }
+    }
+    //ID 중복확인
+    const duplicateChkId = async() => {
+        
+        if(memId === ''){
+            alert('ID를 입력해 주세요.');
+            return;
+        }else if(memIdV === false){
+            alert('유효하지 않은 ID입니다.');
+            return;
+        }
+
+        try{
+            const response = await axios.get('http://localhost:8888/member/getMemberById/'+memId);
+            console.log(response.data.code);
+            if(response.data.code < 0){
+                alert('사용 가능한 ID입니다.');
+            }else{
+                alert('중복 ID가 있습니다.');
+                return(
+                    <div>error</div>
+                )
+            }
+        } catch (e) {
+        console.log(e);
+        }
     }
 
     // 공백확인 함수
@@ -144,13 +173,25 @@ function Profile(){
         }
         return true;
     }
-
+    
     const checkMemId = (v) => {
         //공백체크
         if (!checkExistData(v))
             return false;
  
         let idRegExp = /^[a-zA-z0-9]{6,16}$/; //영문 대소문자, 숫자만 사용, 최소 6~16를 만족해야하는 정규표현식
+        if (!idRegExp.test(v)) {
+            return false;
+        }
+        return true;
+    }
+
+    const checkValidPw = (v) => {
+        //공백체크
+        if (!checkExistData(v))
+            return false;
+ 
+        var idRegExp = /^[a-zA-z0-9]{6,16}$/; //영문 대소문자, 숫자만 사용, 최소 6~16를 만족해야하는 정규표현식
         if (!idRegExp.test(v)) {
             return false;
         }
@@ -219,126 +260,67 @@ function Profile(){
         
         return true;
     }
-    //axios get member
-    const fetchMember = async() =>{
-        try{
-            const response = await axios.get('http://localhost:8888/member/getMember/MK210004');
-            if(response.data.code >=0){
-                setInfo(response.data.data);
-            }else{
-                return(
-                    <div>error</div>
-                )
-            }
-        } catch (e) {
-        console.log(e);
-        }
-    };
-    
 
-    //axios update member
-    const updateMember = async() =>{
-        
-        try{
-            
-            const response = await axios.get('http://localhost:8888/member/updateMember',{params: {...member}});
-            if(response.data.code >=0){
-                alert("변경되었습니다.");
-                fetchMember();
-            }else{
-                return(
-                    <div>error</div>
-                )
-            }
-        } catch (e) {
-            console.log(e);
-        }
 
-        //완료
-        setIsUpdate(false);
-    };
 
-    //회원정보 수정<->조회 클릭
-    const toggleIsUpdateBtn = (e,toggle) => {
-        e.preventDefault();
 
-        let msg = '';
-        if(toggle && window.confirm('변경하시겠습니까?')){
-            setIsUpdate(toggle);
-            if(isUpdate){
-                updateMember();
-            }
-        }else if(!toggle && window.confirm('변경사항이 저장되지 않습니다. 취소하시겠습니까?')){
-            fetchMember();
-            setIsUpdate(toggle);
-        }
-    }
 
     return(
     <div id="wrap">
+
         <div id="container">
             <div id="contents">
                 <div className="path">
                     <span>현재 위치</span>
                     <ol>
                         <li><a href="/">홈</a></li>
-                        <li title="현재 위치"><strong>회원 정보 수정</strong></li>
+                        <li title="현재 위치"><strong>회원 가입</strong></li>
                     </ol>
                 </div>
 
                 <div className="titleArea">
-                    <h2 style={{fontWeight:"bold"}}>MY PROFILE</h2>
+                    <h2>JOIN US</h2>
                 </div>
 
-                <div className="xans-element- xans-myshop xans-myshop-asyncbenefit">
-                    
-                     <div className="">
-                        <div className="information">
-                            <div className="description">
-                                <p>
-                                    회원님은 <strong>[<span className="xans-member-var-group_name">
-                                    {
-                                        (()=>{
-                                            if(memClassCd === 'STAFF' || '')
-                                            return <>일반</>;
-                                        })()
-                                    }
-                                    </span>
-                                    <span className="myshop_benefit_ship_free_message"></span>]</strong> 회원이십니다.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                <center>SNS 회원가입, 로그인을 원하시는 분은 아래 아이콘을 클릭하시면 해당페이지로 이동합니다.
+                    <br/><br/>
+                    <p><a href="//www.furnimass.com/member/login.html"><img style={{width:"250px"}} src={naver_login}/></a></p>
+                </center>
+                <br/><br/>
 
-                    <form id="editForm" name="editForm" action="" method="post" target="_self">
-                        <div className="xans-element- xans-member xans-member-edit">
-                            <h3 className=" ">기본정보</h3>
-                            <p className="required">
-                                <img src={red_dot} alt="필수"/>필수입력사항
-                            </p>
-                            
-                            <div className="boardWrite">
-                                <table border="1" summary="">
-                                    <caption>회원 기본정보</caption>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            아이디 
+                {/* form */}
+                <form id="joinForm" name="joinForm">
+                    <div className="xans-element- xans-member xans-member-join">
+                      
+                        <h3 className=" ">기본정보</h3>
+                        <p className="required ">
+                            <img src={red_dot} alt="필수"/> 필수입력사항
+                        </p>
+                        <div className="boardWrite">
+                            <table border="1" summary="">
+                                <caption>회원 기본정보</caption>
+                                <tbody>
+                                    <tr className="">
+                                        <th scope="row">회원구분
                                             <img src={red_dot} alt="필수"/>
                                         </th>
                                         <td>
-                                            <input id="memId" name='memId' className="inputTypeText" type="text" onChange={onChange} value={memId || ''} />
-                                            (영문소문자/숫자, 6~16자)
+                                            <input id="memGrade" name="memGrade" value="p" type="radio" checked="checked" onChange={onChange} />
+                                            <label>개인회원</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            아이디 <img src={red_dot} alt="필수"/>
+                                        </th>
+                                        <td>
+                                            <input id="memId" name='memId' className="inputTypeText" type="text" style={{verticalAlign : "-10px"}} onChange={onChange} value={memId || ''} />
+                                            <span id="idMsg" style={{verticalAlign : "-10px"}}> (영문소문자/숫자, 4~16자)</span>
+                                            
+                                            <div className="btnArea M b_right" >
+                                                <span className="black" style={{cursor:'pointer'}} onClick={duplicateChkId}>중복 확인</span>
+                                            </div>
 
-                                            {/* 비밀번호 변경 버튼 */}
-                                            {
-                                                !isUpdate &&
-                                                <div className="btnArea M b_right">
-                                                    <Link to="/checkPassword?updatePassword">
-                                                        <span className="black">비밀번호 변경</span>
-                                                    </Link>
-                                                </div>
-                                            }
                                             <br/>
                                             {
                                                 (() => {
@@ -349,13 +331,45 @@ function Profile(){
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row" id="">이름 <img src={red_dot} alt="필수"/></th>
+                                        <th scope="row">비밀번호 <img src={red_dot} alt="필수"/></th>
                                         <td>
-                                            <input id="memNm" name="memNm" className="ec-member-name" type="text" onChange={onChange} value={memNm || ''} />
+                                            <input id="memPw" name="memPw" type="password" value={memPw || ''} onChange={onChange}/>
+                                            (영문 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자)
+                                            <br/>
+                                            {
+                                                (() => {
+                                                    if(memPwV===false)
+                                                        return <><span style={{color:'red'}}>유효하지 않습니다.</span></>
+                                                })()
+                                            }
+                                        </td>
+                                    </tr> 
+                                    <tr>
+                                        <th scope="row">비밀번호 확인<img src={red_dot} alt="필수"/></th>
+                                        <td>
+                                            <input id="memPw2" name="memPw2" type="password" value={memPw2 || ''} onChange={onChange}/>
+                                            <br/>
+                                            {
+                                                (() => {
+                                                    if(memPw2V===false)
+                                                        return <><span style={{color:'red'}}>비밀번호가 동일하지 않습니다.</span></>
+                                                })()
+                                            }
+                                            <span id="pwConfirmMsg"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row" id="">생년월일 <img src={red_dot} alt="필수"/>
+                                        <th scope="row" id="nameTitle">이름<img src={red_dot} alt="필수"/></th>
+                                        <td>
+                                            <span id="nameContents">
+                                            <input id="memNm" name="memNm" className="ec-member-name" type="text" onChange={onChange} value={memNm || ''} />
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr className="">
+                                        <th scope="row">
+                                            생년월일
+                                            <img src={red_dot} className="" alt="필수"/>
                                         </th>
                                         <td>
                                             <input id="memBirth" name="memBirth" type="text" onChange={onChange} value={memBirth || ''} />
@@ -370,14 +384,12 @@ function Profile(){
                                         </td>
                                     </tr>
                                     <tr className="">
-                                        <th scope="row">주소
-                                        <img src={red_dot} alt="필수"/>
-                                        </th>
+                                        <th scope="row">주소 <img src={red_dot} alt="필수"/></th>
                                         <td>
                                             {/* 주소 api */}
                                             <img src={addr_api} style={{cursor:'pointer'}}alt="우편번호" onClick={openPostCode}/>
                                             <div id='popupDom'>
-                                                {isPopupOpen && (
+                                                {isEmailPopOpen && (
                                                     <PopupDom>
                                                         <PopupPostCode onClose={closePostCode} setMember={setMember} member={member}/>
                                                     </PopupDom>
@@ -391,7 +403,9 @@ function Profile(){
                                         </td>
                                     </tr>
                                     <tr className="">
-                                        <th scope="row">일반전화</th>
+                                        <th scope="row">
+                                         일반전화
+                                        </th>
                                         <td>
                                             <input id="memTel" name="memTel" className="inputTypeText" type="text" onChange={onChange} value={memTel || ''} /> 
                                             <br/>
@@ -404,7 +418,10 @@ function Profile(){
                                         </td>
                                     </tr>
                                     <tr className="">
-                                        <th scope="row">휴대전화 <img src={red_dot} alt="필수"/></th>
+                                        <th scope="row">
+                                            휴대전화
+                                            <img src={red_dot} className="" alt="필수"/>
+                                        </th>
                                         <td>
                                             <input id="memPhone" name="memPhone" className="inputTypeText" type="text" onChange={onChange} value={memPhone || ''} /> 
                                             <br/>
@@ -417,13 +434,33 @@ function Profile(){
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">이메일 <img src={red_dot} alt="필수"/>
+                                        <th scope="row">
+                                            이메일
+                                            <img src={red_dot} className="" alt="필수"/>
+
                                         </th>
                                         <td>
                                             <input id="memMail" name="memMail" type="text" onChange={onChange} value={memMail || ''} />
                                             <span id="emailMsg"></span>
-                                            <p className="">이메일 주소 변경 시 로그아웃 후 재인증을 하셔야만 로그인이 가능합니다.
-                                            <br/>인증 메일은 24시간 동안 유효하며, 유효 시간이 만료된 후에는 가입 정보로 로그인 하셔서 재발송 요청을 해주시기 바랍니다.</p>
+                                            
+                                            
+                                            <div className="btnArea M b_right" >
+                                                <span className="black" onClick={authEmail}>이메일 인증</span>
+                                            </div>
+                                            
+                                            <div className="b_right" >
+                                                <img src={red_dot} className="" alt="필수" style={{verticalAlign : "-10px"}} />
+                                                <span style={{verticalAlign : "-10px"}}>
+                                                입력하신 정보로 본인인증을 진행합니다.
+                                                </span>
+                                            </div>
+                                            
+                                            <br/>
+                                            {
+                                                isEmailChk && (
+                                                    <input id="authCode" name="authCode" className="inputTypeText" type="text" onChange={onChange} value={authCode || ''} /> 
+                                                )
+                                            }
                                         </td>
                                     </tr>
                                     <tr className="">
@@ -437,37 +474,28 @@ function Profile(){
                                             <p>쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</p>
                                         </td>
                                     </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
+                        </div>
                         
+                        <div>
+                            <Rules/>
                             <div className="ec-base-button">
                                 <div className="btnArea L b_center">
-                                    <a href="" className="black" onClick={(e) => toggleIsUpdateBtn(e,true)}>회원정보수정</a>
+                                    <a href="#none" className="black">회원가입</a>
                                 </div>
-                                {/* 조건부 렌더링 */}
-                                {
-                                    isUpdate && 
-                                    <div className="btnArea L b_center">
-                                        <a href="" className="gray" onClick={(e) => toggleIsUpdateBtn(e,false)}>취소</a>
-                                    </div>
-                                }
-                                {
-                                    !isUpdate &&
-                                    <div className="btnArea L b_center">
-                                        <Link to="/checkPassword?dropMember">
-                                            <span href="#none" className="white">회원탈퇴</span>
-                                        </Link>
-                                    </div>
-                                }
+                                <div className="btnArea L b_center">
+                                    <a href="/index.html" className="gray">취소</a>
+                                </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>    
+    </div>
     );
 }
 
-export default Profile;
+
+export default Join;

@@ -25,7 +25,7 @@ public class BcryptTestUnit{
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"test123"})
+	@ValueSource(strings = {"1234"})
 	public void mathces(String pw) {
 		BCryptPasswordEncoder b = bCryptPasswordEncoder();
 		String encPw = b.encode(pw);

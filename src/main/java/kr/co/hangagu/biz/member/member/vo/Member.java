@@ -63,11 +63,11 @@ public class Member {
     @Column(name="TERMS_AGREE_YN", length = 1, nullable = false)
     private char termsAgreeYn;
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Column(name ="REG_DT", nullable = false)
     private LocalDateTime regDt;
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Column(name ="MOD_DT", nullable = true)
     private LocalDateTime modDt;
 
