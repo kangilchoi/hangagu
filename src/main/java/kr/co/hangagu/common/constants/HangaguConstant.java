@@ -121,4 +121,6 @@ public class HangaguConstant {
     	}
     }
 
+    public static String HANGAGU_EMAIL = "s";
+    public static String HANGAGU_EMAIL_PW = "s";
 }
