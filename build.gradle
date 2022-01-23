@@ -18,6 +18,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation group: 'com.google.code.gson', name: 'gson'
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -40,7 +41,7 @@ dependencies {
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 
 	//email sender
-	implementation 'com.sun.mail:javax.mail'
+	implementation 'com.sun.mail:javax.mail:1.6.2'
 }
 
 // 리액트 설정
