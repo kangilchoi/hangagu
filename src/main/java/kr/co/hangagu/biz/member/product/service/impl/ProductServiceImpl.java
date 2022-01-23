@@ -1,19 +1,20 @@
 package kr.co.hangagu.biz.member.product.service.impl;
 
+import kr.co.hangagu.biz.common.mysql.repository.HangaguFunctionRepository;
+import kr.co.hangagu.biz.member.product.dto.ProductDto;
+import kr.co.hangagu.biz.member.product.entity.Product;
 import kr.co.hangagu.biz.member.product.repository.ProductRepository;
-import kr.co.hangagu.biz.member.product.repository.ProductRepositorySupport;
 import kr.co.hangagu.biz.member.product.service.ProductService;
-import kr.co.hangagu.biz.member.product.vo.ProductVO;
-import kr.co.hangagu.common.vo.ResultVO;
+import kr.co.hangagu.common.dto.ResultDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -22,75 +23,86 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Autowired
-    private ProductRepositorySupport productRepositorySupport;
+    private HangaguFunctionRepository functionRepository;
 
     @Override
-    public ResultVO findList(ProductVO vo) {
-        ResultVO resultVO = new ResultVO();
+    public ResultDto findList(ProductDto dto, Pageable pageable) {
+        ResultDto resultDto = new ResultDto();
 
-        Map<String, Object> resultMap = new HashMap<>();
-        List<ProductVO> list = productRepositorySupport.selectProductList(vo);
+        Page<ProductDto> result = productRepository.selectProductList(dto, pageable);
 
-        resultMap.put("totalCount", list == null ? "0" : list.size());
-        resultMap.put("list", list);
-        resultVO.setData(resultMap);
-
-        return resultVO;
+        resultDto.setData(result);
+        return resultDto;
     }
 
     @Override
-    public ResultVO findByPmKey(String pmKey) {
-        ResultVO resultVO = new ResultVO();
-        Optional<ProductVO> productOpt = productRepository.findByPmKey(pmKey);
+    public ResultDto findByPmKey(ProductDto dto) {
+        ResultDto resultDto = new ResultDto();
 
-        if(!productOpt.isPresent()) {
-            resultVO.setCode("9999");
-            resultVO.setMessage("데이터 없음");
-        } else {
-            resultVO.setData(productOpt.get());
-        }
+        ProductDto productDto = productRepository.selectProductDetail(dto);
 
-        return resultVO;
+        resultDto.setData(productDto);
+
+        return resultDto;
     }
 
     @Override
-    public ResultVO save(ProductVO vo) {
-        ResultVO resultVO = new ResultVO();
+    public ResultDto save(ProductDto dto) {
+        ResultDto resultDto = new ResultDto();
 
-        ProductVO newProduct = productRepository.save(vo);
+        LocalDateTime now = LocalDateTime.now();
+
+        // 리팩토링(적정팩토리메소드)
+        Product prd = new Product();
+        prd.setPmKey(functionRepository.makeKeyFunction("PK"));
+        prd.setPmClassCd(dto.getPmClassCd());
+        prd.setPmDetailClassCd(dto.getPmDetailClassCd());
+        prd.setPmLineCd(dto.getPmLineCd());
+        prd.setPmNm(dto.getPmNm());
+        prd.setPmColor(dto.getPmColor());
+        prd.setPmStock(dto.getPmStock());
+        prd.setPmSize(dto.getPmSize());
+        prd.setPmPrice(dto.getPmPrice());
+        prd.setPmRemark(dto.getPmRemark());
+        prd.setRegDt(now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        prd.setRegEmpKey(dto.getRegEmpKey());
+        prd.setModDt(now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        prd.setModEmpKey(dto.getModEmpKey());
+        prd.setDeleteYn("N");
+
+        Product newProduct = productRepository.save(prd);
 
         if(newProduct == null) {
-            resultVO.setData("9999");
-            resultVO.setMessage("등록 실패");
+            resultDto.setData("9999");
+            resultDto.setMessage("등록 실패");
         } else {
-            resultVO.setData(newProduct);
+            resultDto.setData(newProduct);
         }
 
-        return resultVO;
+        return resultDto;
     }
 
     @Override
-    public ResultVO update(ProductVO vo) {
-        ResultVO resultVO = new ResultVO();
+    public ResultDto update(ProductDto dto) {
+        ResultDto resultDto = new ResultDto();
 
-        Optional<ProductVO> prdOpt = productRepository.findByPmKey(vo.getPmKey());
+        Product product = new Product();
+        product.setPmKey(dto.getPmKey());
 
-        prdOpt.ifPresent(selectProduct -> {
-            selectProduct.setDeleteYn(vo.getDeleteYn());
-            selectProduct.setModDt(String.valueOf(LocalDate.now()));
-            //세션에 저장되어있는 값 가져오기(stfId)
-            //selectProduct.setModEmpKey();
+        product.setDeleteYn(dto.getDeleteYn());
+        product.setModDt(String.valueOf(LocalDate.now()));
+        //세션에 저장되어있는 값 가져오기(stfId)
+        //selectProduct.setModEmpKey();
 
-            ProductVO newProduct = productRepository.save(selectProduct);
-            if(newProduct == null) {
-                resultVO.setData("9999");
-                resultVO.setMessage("수정 실패");
-            } else {
-                resultVO.setData(newProduct);
-            }
-        });
+        Product newProduct = productRepository.save(product);
+        if(newProduct == null) {
+            resultDto.setData("9999");
+            resultDto.setMessage("수정 실패");
+        } else {
+            resultDto.setData(newProduct);
+        }
 
-        return resultVO;
+        return resultDto;
     }
 
 

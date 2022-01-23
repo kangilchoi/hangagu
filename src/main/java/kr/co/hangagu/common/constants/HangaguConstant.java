@@ -1,6 +1,7 @@
 package kr.co.hangagu.common.constants;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,6 +68,34 @@ public class HangaguConstant {
     		return this.value;
     	}
     }
+
+	public enum ResponseEnum {
+		SUCCESS("1", "SUCCESS"),
+		FAILURE("0", "FAIL"),
+
+		NOT_EXIST_RESPONSE("9999", "NOT_FOUNT");
+
+		private String code;
+		private String desc;
+
+		ResponseEnum(String code, String desc) {
+			this.code = code;
+			this.desc = desc;
+		}
+		public String getCode() {
+			return code;
+		}
+
+		public String getDesc() {
+			return desc;
+		}
+
+		public static String findDescByCode(String code) {
+			return Arrays.stream(values()).
+					filter(responseEnum -> responseEnum.getCode().equals(code)).findAny().orElse(NOT_EXIST_RESPONSE).getDesc();
+		}
+	}
+
     
     //테이블
     public enum Table {
@@ -120,5 +149,19 @@ public class HangaguConstant {
     		return this.value;
     	}
     }
+
+    public enum Sql {
+    	makeKey("SELECT .make_key(?)");
+
+    	private String value;
+
+    	private Sql(String value) {
+    		this.value = value;
+    	}
+
+    	public String getValue() {
+    		return this.value;
+		}
+	}
 
 }

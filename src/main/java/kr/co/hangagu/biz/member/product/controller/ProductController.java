@@ -1,9 +1,13 @@
 package kr.co.hangagu.biz.member.product.controller;
 
+import kr.co.hangagu.biz.member.product.dto.ProductDto;
 import kr.co.hangagu.biz.member.product.service.ProductService;
-import kr.co.hangagu.biz.member.product.vo.ProductVO;
+import kr.co.hangagu.common.dto.ResultDto;
 import kr.co.hangagu.common.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,29 +25,51 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value="/list", method = RequestMethod.POST)
-    public @ResponseBody ResultVO getProductList(ProductVO vo) {
-        ResultVO resultVO = productService.findList(vo);
-        return resultVO;
+    @RequestMapping(
+            value = {"list/{pmClassCd}/{pmDetailClassCd}/{pmLineCd}"
+                    , "list/{pmClassCd}/{pmDetailClassCd}"
+                    , "list/{pmClassCd}"}
+            , method = RequestMethod.GET
+    )
+    public @ResponseBody
+    ResultDto getProductList(@PathVariable("pmClassCd") String pmClassCd
+                            , @PathVariable(value = "pmDetailClassCd", required = false) String pmDetailClassCd
+                            , @PathVariable(value = "pmLineCd", required = false) String pmLineCd
+                            , @RequestParam(value = "page", required = false, defaultValue="1") int page
+                            , @RequestParam(value = "size", required = false, defaultValue="10") int size) {
+        ProductDto dto = new ProductDto();
+        dto.setPmClassCd(pmClassCd);
+        dto.setPmDetailClassCd(pmDetailClassCd);
+        dto.setPmLineCd(pmLineCd);
+
+        Pageable pageable = PageRequest.of(page-1, size);
+        ResultDto resultDto = productService.findList(dto, pageable);
+        return resultDto;
     }
 
-//    @RequestMapping(value = "/detail/{pmKey}", method = RequestMethod.GET)
-//    public @ResponseBody
-//    ResultVO getProductByPmKey(@PathVariable("pmKey") String pmKey) {
-//        ResultVO resultVO = productService.findByPmKey(pmKey);
-//        return resultVO;
-//    }
-
-    @RequestMapping(value="/create", method = RequestMethod.POST)
-    public @ResponseBody ResultVO create(ProductVO vo) {
-        ResultVO resultVO = productService.save(vo);
-        return resultVO;
+    @RequestMapping(value = "/detail/{pmClassCd}/{pmDetailClassCd}/{pmLineCd}/{pmKey}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResultDto getProductDetail(@PathVariable("pmClassCd") String pmClassCd, @PathVariable("pmDetailClassCd") String pmDetailClassCd
+                                , @PathVariable("pmLineCd") String pmLineCd, @PathVariable("pmKey") String pmKey) {
+        ProductDto dto = new ProductDto();
+        dto.setPmClassCd(pmClassCd);
+        dto.setPmDetailClassCd(pmDetailClassCd);
+        dto.setPmLineCd(pmDetailClassCd);
+        dto.setPmKey(pmKey);
+        ResultDto resultDto = productService.findByPmKey(dto);
+        return resultDto;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public @ResponseBody ResultVO update(ProductVO vo) {
-        ResultVO resultVO = productService.update(vo);
-        return resultVO;
+    @RequestMapping(value="/create", method = RequestMethod.PUT)
+    public @ResponseBody ResultDto createProduct(ProductDto dto) {
+        ResultDto resultDto = productService.save(dto);
+        return resultDto;
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.PATCH)
+    public @ResponseBody ResultDto updateProduct(ProductDto dto) {
+        ResultDto resultDto = productService.update(dto);
+        return resultDto;
     }
 
 }
