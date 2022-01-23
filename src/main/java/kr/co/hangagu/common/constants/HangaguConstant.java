@@ -96,7 +96,7 @@ public class HangaguConstant {
 		}
 	}
 
-    
+
     //테이블
     public enum Table {
     	MEMBER("MK"),
@@ -164,4 +164,6 @@ public class HangaguConstant {
 		}
 	}
 
+    public static String HANGAGU_EMAIL = "s";
+    public static String HANGAGU_EMAIL_PW = "s";
 }
