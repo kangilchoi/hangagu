@@ -1,59 +1,41 @@
-package kr.co.hangagu.biz.member.product.vo;
+package kr.co.hangagu.biz.member.product.dto;
 
-import kr.co.hangagu.common.vo.BaseVO;
+public class ProductDto {
 
-import javax.persistence.*;
+    private String pmKey;
 
-
-@Entity
-@Table(name = "PRODUCT_TB")
-public class ProductVO extends BaseVO {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "PM_KEY")
-    private String pmKey; // PK
-
-    @Column(name = "PM_CLASS_CD")
     private String pmClassCd;
 
-    @Column(name = "PM_DETAIL_CLASS_CD")
+    private String pmClassCdDesc;
+
     private String pmDetailClassCd;
 
-    @Column(name = "PM_LINE_CD")
+    private String pmDetailClassCdDesc;
+
     private String pmLineCd;
 
-    @Column(name = "PM_NM")
+    private String pmLineCdDesc;
+
     private String pmNm;
 
-    @Column(name = "PM_COLOR")
     private String pmColor;
 
-    @Column(name = "PM_STOCK")
     private String pmStock;
 
-    @Column(name = "PM_SIZE")
     private String pmSize;
 
-    @Column(name = "PM_PRICE")
     private String pmPrice;
 
-    @Column(name = "PM_REMARK")
     private String pmRemark;
 
-    @Column(name = "REG_DT")
     private String regDt;
 
-    @Column(name = "REG_EMP_KEY")
     private String regEmpKey;
 
-    @Column(name = "MOD_DT")
     private String modDt;
 
-    @Column(name = "MOD_EMP_KEY")
     private String modEmpKey;
 
-    @Column(name = "DELETE_YN")
     private String deleteYn;
 
     public String getPmKey() {
@@ -72,6 +54,14 @@ public class ProductVO extends BaseVO {
         this.pmClassCd = pmClassCd;
     }
 
+    public String getPmClassCdDesc() {
+        return pmClassCdDesc;
+    }
+
+    public void setPmClassCdDesc(String pmClassCdDesc) {
+        this.pmClassCdDesc = pmClassCdDesc;
+    }
+
     public String getPmDetailClassCd() {
         return pmDetailClassCd;
     }
@@ -80,12 +70,28 @@ public class ProductVO extends BaseVO {
         this.pmDetailClassCd = pmDetailClassCd;
     }
 
+    public String getPmDetailClassCdDesc() {
+        return pmDetailClassCdDesc;
+    }
+
+    public void setPmDetailClassCdDesc(String pmDetailClassCdDesc) {
+        this.pmDetailClassCdDesc = pmDetailClassCdDesc;
+    }
+
     public String getPmLineCd() {
         return pmLineCd;
     }
 
     public void setPmLineCd(String pmLineCd) {
         this.pmLineCd = pmLineCd;
+    }
+
+    public String getPmLineCdDesc() {
+        return pmLineCdDesc;
+    }
+
+    public void setPmLineCdDesc(String pmLineCdDesc) {
+        this.pmLineCdDesc = pmLineCdDesc;
     }
 
     public String getPmNm() {
@@ -159,6 +165,8 @@ public class ProductVO extends BaseVO {
     public void setModDt(String modDt) {
         this.modDt = modDt;
     }
+
+
 
     public String getModEmpKey() {
         return modEmpKey;

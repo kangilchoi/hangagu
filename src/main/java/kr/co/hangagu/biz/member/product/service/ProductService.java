@@ -2,20 +2,18 @@ package kr.co.hangagu.biz.member.product.service;
 
 
 
-import kr.co.hangagu.biz.member.product.vo.ProductVO;
-import kr.co.hangagu.common.vo.ResultVO;
-
-
-import java.util.Optional;
+import kr.co.hangagu.biz.member.product.dto.ProductDto;
+import kr.co.hangagu.common.dto.ResultDto;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
 
-    public ResultVO findList(ProductVO vo);
+    public ResultDto findList(ProductDto dto, Pageable pageable);
 
-    public ResultVO findByPmKey(String pmKey);
+    public ResultDto findByPmKey(ProductDto dto);
 
-    public ResultVO save(ProductVO vo);
+    public ResultDto save(ProductDto dto);
 
-    public ResultVO update(ProductVO vo);
+    public ResultDto update(ProductDto dto);
 
 }
