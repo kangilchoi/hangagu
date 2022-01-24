@@ -1,4 +1,4 @@
-package kr.co.hangagu.biz.member.product.vo;
+package kr.co.hangagu.biz.member.product.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -10,14 +10,14 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QProductVO is a Querydsl query type for ProductVO
+ * QProduct is a Querydsl query type for Product
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QProductVO extends EntityPathBase<ProductVO> {
+public class QProduct extends EntityPathBase<Product> {
 
-    private static final long serialVersionUID = -368384321L;
+    private static final long serialVersionUID = -2023105872L;
 
-    public static final QProductVO productVO = new QProductVO("productVO");
+    public static final QProduct product = new QProduct("product");
 
     public final StringPath deleteYn = createString("deleteYn");
 
@@ -49,16 +49,16 @@ public class QProductVO extends EntityPathBase<ProductVO> {
 
     public final StringPath regEmpKey = createString("regEmpKey");
 
-    public QProductVO(String variable) {
-        super(ProductVO.class, forVariable(variable));
+    public QProduct(String variable) {
+        super(Product.class, forVariable(variable));
     }
 
-    public QProductVO(Path<? extends ProductVO> path) {
+    public QProduct(Path<? extends Product> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QProductVO(PathMetadata metadata) {
-        super(ProductVO.class, metadata);
+    public QProduct(PathMetadata metadata) {
+        super(Product.class, metadata);
     }
 
 }
