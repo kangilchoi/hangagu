@@ -19,6 +19,9 @@ public class Product {
     @Column(name = "PM_LINE_CD")
     private String pmLineCd;
 
+    @Column(name = "PM_ORDER_CNT")
+    private String pmOrderCnt;
+
     @Column(name = "PM_NM")
     private String pmNm;
 
@@ -82,6 +85,14 @@ public class Product {
 
     public void setPmLineCd(String pmLineCd) {
         this.pmLineCd = pmLineCd;
+    }
+
+    public String getPmOrderCnt() {
+        return pmOrderCnt;
+    }
+
+    public void setPmOrderCnt(String pmOrderCnt) {
+        this.pmOrderCnt = pmOrderCnt;
     }
 
     public String getPmNm() {

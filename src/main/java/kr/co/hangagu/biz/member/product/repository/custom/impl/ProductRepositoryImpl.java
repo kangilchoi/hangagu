@@ -129,4 +129,47 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements 
 
         return result;
     }
+
+    @Override
+    public List<ProductDto> selectPopularProductList() {
+
+        QProduct prd = QProduct.product;
+        QCodeMng code1 = new QCodeMng("code1");
+        QCodeMng code2 = new QCodeMng("code2");
+        QCodeMng code3 = new QCodeMng("code3");
+
+        List<ProductDto> result = queryFactory
+                .select(
+                        Projections.bean(ProductDto.class,
+                                prd.pmKey.as("pmKey"),
+                                prd.pmClassCd.as("pmClassCd"),
+                                code1.cdDesc.as("pmClassCdDesc"),
+                                prd.pmDetailClassCd.as("pmDetailClassCd"),
+                                code2.cdDesc.as("pmDetailClassCdDesc"),
+                                prd.pmLineCd.as("pmLineCd"),
+                                code3.cdDesc.as("pmLineCdDesc"),
+                                prd.pmNm.as("pmNm"),
+                                prd.pmColor.as("pmColor"),
+                                prd.pmStock.as("pmStock"),
+                                prd.pmSize.as("pmSize"),
+                                prd.pmPrice.as("pmPrice"),
+                                prd.pmRemark.as("pmRemark"),
+                                prd.regDt.as("regDt"),
+                                prd.regEmpKey.as("regEmpKey"),
+                                prd.modDt.as("modDt"),
+                                prd.modEmpKey.as("modEmpKey"),
+                                prd.deleteYn.as("deleteYn")
+                        )
+                )
+                .from(prd)
+                .leftJoin(code1).on(prd.pmClassCd.eq(code1.cdNm), code1.cdClass.eq("PM_CLASS_CD"), code1.deleteYn.eq("N"))
+                .leftJoin(code2).on(prd.pmDetailClassCd.eq(code2.cdNm), code2.cdClass.eq("PM_DETAIL_CLASS_CD"), code1.deleteYn.eq("N"))
+                .leftJoin(code3).on(prd.pmLineCd.eq(code3.cdNm), code3.cdClass.eq("PM_LINE_CD"), code3.deleteYn.eq("N"))
+                .where(prd.deleteYn.eq("N"))
+                .orderBy(prd.pmOrderCnt.desc(), prd.regDt.desc())
+                .limit(4)
+                .fetch();
+
+        return result;
+    }
 }

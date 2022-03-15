@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -105,5 +106,13 @@ public class ProductServiceImpl implements ProductService {
         return resultDto;
     }
 
+    @Override
+    public ResultDto findPopularList() {
+        ResultDto resultDto = new ResultDto();
 
+        List<ProductDto> result = productRepository.selectPopularProductList();
+
+        resultDto.setData(result);
+        return resultDto;
+    }
 }
