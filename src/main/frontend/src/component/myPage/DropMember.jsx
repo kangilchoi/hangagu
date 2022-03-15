@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import * as Auth from 'component/Auth';
+
 /*css*/
 import "css/myPage/memberModify.css"
 
@@ -23,10 +25,12 @@ function DropMember(){
     const dropMember = async() =>{
 
         try{
-            
-            const response = await axios.get('http://localhost:8888/member/dropMember/MK210004');
+            let username = Auth.getLoggedInUserName();
+
+            const response = await axios.get('/member/dropMember/'+username);
             if(response.data.code >=0){
                 alert("탈퇴가 완료되었습니다.");
+                Auth.logout();
             }else{
                 alert("탈퇴에 실패하였습니다.");
             }

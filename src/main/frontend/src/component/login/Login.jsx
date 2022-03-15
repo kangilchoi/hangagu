@@ -1,69 +1,138 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import * as Auth from 'component/Auth';
+import { Link } from 'react-router-dom'
+import * as Header from 'component/Header';
+
 /*css*/
 import "css/login/login.css"
 
 
 /*img*/
-import g_btn_menu_plus from "img/g_btn_menu_plus.png"
-import member_icon_b from "img/member_icon_b.png"
-import cart_icon_b from "img/cart_icon_b.png"
-import find_icon_b from "img/find_icon_b.png"
+import login_btn_kakao from "img/login_btn_kakao.png"
 
-function Login() {
+function Login(props) {
+    const history = useHistory();
+    const [id,setId] = useState('');
+    const [pw,setPw] = useState('');
+
+    //Hook(useEffect) : 컴포넌트 랜더링마다 실행
+    useEffect(() => {
+        if(props.location.state){
+            //console.log(props.location.state.id.chkId);
+            setId(props.location.state.id.chkId);
+        }
+    },[]);
+
+    const onChange = (e) => {
+        let type = e.target.name;
+        let value = e.target.value;
+
+
+        if(type === 'id'){
+            setId(value);
+        }else if(type === 'pw'){
+            setPw(value);
+        } 
+    }
+
+    //모든 Request/Response가 목적지에 도달하기 전에 Request에 원하는 내용을 담아 보내거나 원하는 코드를 실행
+    axios.interceptors.request.use(
+        config => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                config.headers['Authorization'] = 'Bearer ' + token;
+            }
+            config.headers['Content-Type'] = 'application/json';
+            return config;
+        },
+        error => {
+            Promise.reject(error)
+    });
+
+    //로그인
+    const  onLogin = (e) => {
+        e.preventDefault();
+
+        let params = {
+            "username":id
+            ,"password":pw
+        };
+
+        axios.post('/auth/login',params).then(response => {
+
+            registerJwt(id,response.data.token);
+            
+            //Header.login;
+          
+            window.location.replace("/header")
+        }).catch(error => {
+            // ... 에러 처리
+            console.log(error);
+            return(
+                <div>error</div>
+            )
+        });
+    }
+
+    const registerJwt = (username, token) =>{
+        //console.log("===registerSuccessfulLoginForJwt===")
+        localStorage.setItem('token', token);
+        localStorage.setItem('authenticatedUser', username);
+        
+    }
+
     return(
         <div id="wrap">
             <div id="container">
                 <div id="contents">
 
-                    <div className="path">
-                        <span>현재 위치</span>
-                        <ol>
-                            <li><a href="/">홈</a></li>
-                            <li title="현재 위치"><strong>로그인</strong></li>
-                        </ol>
-                    </div>
-
                     <div className="titleArea">
                         <h2>LOGIN</h2>
                     </div>
 
-                    <div class="login_box">
+                    <div className="login_box">
                         <ul>
                             <li>
-                                <form name="" enctype="multipart/form-data">
-                                    <div class="xans-element- xans-member xans-member-login ">
-                                        <div class="login">
+                                <form name="" encType="multipart/form-data">
+                                    <div className="xans-element- xans-member xans-member-login ">
+                                        <div className="login">
                                             <fieldset>
                                                 <legend>회원로그인</legend>
                                                 <label className="id ePlaceholder" title="아이디">
-                                                    <input id="member_id" name="member_id" class="inputTypeText" placeholder="아이디" value="" type="text"/>
+                                                    <input id="id" name="id" className="inputTypeText" placeholder="아이디" value={id} type="text" onChange={onChange}/>
                                                 </label>
                                                 <label className="password ePlaceholder" title="비밀번호">
-                                                    <input id="member_passwd" name="member_passwd" autocomplete="off" value=""type="password" placeholder="비밀번호"/>
+                                                    <input id="pw" name="pw" value={pw} type="password" placeholder="비밀번호" onChange={onChange}/>
                                                 </label>
                                                 <div className="btnArea Login center">
-                                                    <a href="#" class="black">로그인</a>
+                                                    <a href="" className="black" onClick={onLogin}>로그인</a>
                                                 </div>
-                                                <div class="find">
-                                                    <a href="#">- 아이디찾기</a>
-                                                    <a href="#">- 비밀번호찾기</a>
+                                                <div className="find">
+                                                     <Link to="/login/findId">
+                                                        <span className="black">-아이디찾기 </span>
+                                                    </Link>
+                                                    <Link to="/login/findPassword">
+                                                        <span className="black"> -비밀번호찾기</span>
+                                                    </Link>
+                                                    
                                                 </div>
-
-                                                <div class="snsArea">
+                                                {/* 
+                                                <div className="snsArea">
                                                     <ul>
-                                                        <li class="">
+                                                        <li className="">
                                                             <a href="#">
-                                                                <img src="../../img/login_btn_naver.png" alt="네이버 로그인"/></a>
-                                                        </li>
-                                                        <li class="">
-                                                            <a href="#">
-                                                                <img src="../../img/login_btn_kakao.png" alt="카카오계정 로그인"/></a>
+                                                                <img src={login_btn_kakao} alt="카카오계정 로그인"/></a>
                                                         </li>
                                                     </ul>
                                                 </div>
-
-                                                <div class="link">
-                                                    <div class="btnArea Login center">
-                                                        <a href="#" class="gray">회원가입</a>
+                                                */}
+                                                <div className="link">
+                                                    <div className="btnArea Login center">
+                                                        <Link to="/join">
+                                                        <span className="gray">회원가입</span>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </fieldset>

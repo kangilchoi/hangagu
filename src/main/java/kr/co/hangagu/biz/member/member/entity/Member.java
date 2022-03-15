@@ -1,4 +1,4 @@
-package kr.co.hangagu.biz.member.member.vo;
+package kr.co.hangagu.biz.member.member.entity;
 
 import java.time.LocalDateTime;
 
@@ -73,6 +73,9 @@ public class Member {
 
     @Column(name="DELETE_YN", length = 1, nullable = false)
     private char deleteYn;
+    
+    @Column(name="MEM_POST", length = 8, nullable = true)
+    private String memPost;
     
     public Member() {
     }

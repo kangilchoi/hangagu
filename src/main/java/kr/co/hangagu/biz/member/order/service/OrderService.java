@@ -174,10 +174,10 @@ public class OrderService {
 	}
 	
 	//마이페이지 주문 내역
-	public Response myPage(String memKey) {
+	public Response myPage(String memId) {
 		Response res = new Response();
 		
-		Optional<List<Object>> o = orderDao.myPage(memKey);
+		Optional<List<Object>> o = orderDao.myPage(memId);
 		
 		if(o.isPresent()) {
 			res.setCode(Code.SUCCESS.getKey());

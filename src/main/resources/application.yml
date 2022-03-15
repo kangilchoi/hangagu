@@ -4,8 +4,8 @@ spring:
     active: dev
 
 ##webcontents 설정
-  thymeleaf:
-    prefix: classpath:/static/view/
+  #thymeleaf:
+    #prefix: classpath:/static/view/
   
   mvc:
     view:

@@ -13,14 +13,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
+import org.springframework.stereotype.Component;
+
 import kr.co.hangagu.common.constants.HangaguConstant;
 import kr.co.hangagu.common.constants.HangaguConstant.Code;
 import kr.co.hangagu.common.response.Response;
 
+@Component
 public class MailSender {
 
 	
-	public Response sendAuthMail(String from,String to, int authCode) {
+	public Response sendAuthMail(String to, int authCode) {
 		Response res = new Response();
 		
 		String username=HangaguConstant.HANGAGU_EMAIL;
