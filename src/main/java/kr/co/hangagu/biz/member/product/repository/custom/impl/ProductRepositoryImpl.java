@@ -148,6 +148,7 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements 
                                 code2.cdDesc.as("pmDetailClassCdDesc"),
                                 prd.pmLineCd.as("pmLineCd"),
                                 code3.cdDesc.as("pmLineCdDesc"),
+                                prd.pmOrderCnt.as("pmOrderCnt"),
                                 prd.pmNm.as("pmNm"),
                                 prd.pmColor.as("pmColor"),
                                 prd.pmStock.as("pmStock"),
@@ -166,7 +167,7 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements 
                 .leftJoin(code2).on(prd.pmDetailClassCd.eq(code2.cdNm), code2.cdClass.eq("PM_DETAIL_CLASS_CD"), code1.deleteYn.eq("N"))
                 .leftJoin(code3).on(prd.pmLineCd.eq(code3.cdNm), code3.cdClass.eq("PM_LINE_CD"), code3.deleteYn.eq("N"))
                 .where(prd.deleteYn.eq("N"))
-                .orderBy(prd.pmOrderCnt.desc(), prd.regDt.desc())
+                .orderBy(prd.pmOrderCnt.asc(), prd.regDt.desc())
                 .limit(4)
                 .fetch();
 
