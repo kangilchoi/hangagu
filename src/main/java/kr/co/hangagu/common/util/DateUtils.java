@@ -1,7 +1,5 @@
 package kr.co.hangagu.common.util;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
@@ -14,27 +12,27 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class DateUtils {
 	
-	@CreatedDate
+	//@CreatedDate
 	@Column(name="REG_DT", nullable=false, updatable=false)
-	private LocalDateTime regDt;
+	private String regDt;
 	
-	@LastModifiedDate
+	//@LastModifiedDate
 	@Column(name="MOD_DT", nullable=true)
-	private LocalDateTime modDt;
+	private String modDt;
 
-	public LocalDateTime getRegDt() {
+	public String getRegDt() {
 		return regDt;
 	}
 
-	public void setRegDt(LocalDateTime regDt) {
+	public void setRegDt(String regDt) {
 		this.regDt = regDt;
 	}
 
-	public LocalDateTime getModDt() {
+	public String getModDt() {
 		return modDt;
 	}
 
-	public void setModDt(LocalDateTime modDt) {
+	public void setModDt(String modDt) {
 		this.modDt = modDt;
 	}
 	

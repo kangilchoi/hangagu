@@ -16,6 +16,8 @@ public class ProductDto {
 
     private String pmLineCdDesc;
 
+    private String pmOrderCnt;
+
     private String pmNm;
 
     private String pmColor;
@@ -92,6 +94,14 @@ public class ProductDto {
 
     public void setPmLineCdDesc(String pmLineCdDesc) {
         this.pmLineCdDesc = pmLineCdDesc;
+    }
+
+    public String getPmOrderCnt() {
+        return pmOrderCnt;
+    }
+
+    public void setPmOrderCnt(String pmOrderCnt) {
+        this.pmOrderCnt = pmOrderCnt;
     }
 
     public String getPmNm() {

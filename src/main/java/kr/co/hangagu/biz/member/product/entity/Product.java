@@ -19,6 +19,9 @@ public class Product {
     @Column(name = "PM_LINE_CD")
     private String pmLineCd;
 
+    @Column(name = "PM_ORDER_CNT")
+    private String pmOrderCnt;
+
     @Column(name = "PM_NM")
     private String pmNm;
 
@@ -33,6 +36,12 @@ public class Product {
 
     @Column(name = "PM_PRICE")
     private String pmPrice;
+    
+    @Column(name = "PM_DELIVERY_PRICE")
+    private String pmDeliveryPrice;
+    
+    @Column(name = "PM_SALES_RATE")
+    private String pmSalesRate;
 
     @Column(name = "PM_REMARK")
     private String pmRemark;
@@ -84,6 +93,14 @@ public class Product {
         this.pmLineCd = pmLineCd;
     }
 
+    public String getPmOrderCnt() {
+        return pmOrderCnt;
+    }
+
+    public void setPmOrderCnt(String pmOrderCnt) {
+        this.pmOrderCnt = pmOrderCnt;
+    }
+
     public String getPmNm() {
         return pmNm;
     }
@@ -124,7 +141,23 @@ public class Product {
         this.pmPrice = pmPrice;
     }
 
-    public String getPmRemark() {
+    public String getPmDeliveryPrice() {
+		return pmDeliveryPrice;
+	}
+
+	public void setPmDeliveryPrice(String pmDeliveryPrice) {
+		this.pmDeliveryPrice = pmDeliveryPrice;
+	}
+
+	public String getPmSalesRate() {
+		return pmSalesRate;
+	}
+
+	public void setPmSalesRate(String pmSalesRate) {
+		this.pmSalesRate = pmSalesRate;
+	}
+
+	public String getPmRemark() {
         return pmRemark;
     }
 

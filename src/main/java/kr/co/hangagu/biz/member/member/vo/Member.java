@@ -39,6 +39,9 @@ public class Member {
     @Column(name="MEM_DETAIL_ADDR", length = 256, nullable = false)
     private String memDetailAddr;
 
+    @Column(name="MEM_POST", length = 32, nullable = true)
+    private String memPost;
+    
     @Column(name="MEM_TEL", length = 10, nullable = true)
     private String memTel;
     
@@ -80,7 +83,7 @@ public class Member {
 	
 
 	public Member(String memKey, String memClassCd, String memId, String memPw, String memNm, String memAddr,
-			String memDetailAddr, String memTel, String memPhone, String memMail, char memMailReceptYn,
+			String memDetailAddr, String memPost, String memTel, String memPhone, String memMail, char memMailReceptYn,
 			String memBirth, String memArea, String memGrade, char termsAgreeYn, LocalDateTime regDt,
 			LocalDateTime modDt, char deleteYn) {
 		super();
@@ -91,6 +94,7 @@ public class Member {
 		this.memNm = memNm;
 		this.memAddr = memAddr;
 		this.memDetailAddr = memDetailAddr;
+		this.memPost = memPost;
 		this.memTel = memTel;
 		this.memPhone = memPhone;
 		this.memMail = memMail;
@@ -160,6 +164,14 @@ public class Member {
 
 	public void setMemDetailAddr(String memDetailAddr) {
 		this.memDetailAddr = memDetailAddr;
+	}
+
+	public String getMemPost() {
+		return memPost;
+	}
+
+	public void setMemPost(String memPost) {
+		this.memPost = memPost;
 	}
 
 	public String getMemTel() {

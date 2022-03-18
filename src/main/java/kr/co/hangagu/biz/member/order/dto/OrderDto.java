@@ -1,110 +1,70 @@
-package kr.co.hangagu.biz.member.order.entity;
+package kr.co.hangagu.biz.member.order.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.DynamicInsert;
-
-import kr.co.hangagu.biz.member.orderProduct.entity.OrderProductEntity;
-import kr.co.hangagu.common.constants.HangaguConstant;
-import kr.co.hangagu.common.util.DateUtils;
-
-@Entity
-@Table(name="ORDER_TB")
-//@Inheritance(strategy = InheritanceType.JOINED)
-@DynamicInsert
-public class OrderEntity extends DateUtils {
+public class OrderDto {
 	
-	/* @GeneratedValue(strategy=GenerationType.AUTO) */
-	
-	@Id
-	@Column(name="OD_KEY", nullable=false)
 	private String odKey;
 	
-	@Column(name="CART_KEY", nullable=false)
 	private int cartKey;
 	
-	@Column(name="DELIVERY_PRICE", nullable=false)
-	private String deliveryPrice;
-	
-	@Column(name="OD_PRICE", nullable=false)
-	private String odPrice;
-	
-	@Column(name="SALES_PRICE", nullable=true)
-	private String salesPrice;
-	
-	@Column(name="OD_CUST_NAME", nullable=true)
-	private String odCustName;
-	
-	@Column(name="OD_CUST_POST", nullable=true)
-	private String odCustPost;
-	
-	@Column(name="OD_CUST_ADDR", nullable=true)
-	private String odCustAddr;
-	
-	@Column(name="OD_CUST_ADDR2", nullable=true)
-	private String odCustAddr2;
-	
-	@Column(name="OD_CUST_TEL", nullable=true)
-	private String odCustTel;
-	
-	@Column(name="OD_CUST_MOBILE", nullable=true)
-	private String odCustMobile;
-	
-	@Column(name="OD_CUST_EMAIL", nullable=true)
-	private String odCustEmail;
-	
-	@Column(name="OD_RECEIVER_NAME", nullable=true)
-	private String odReceiverName;
-	
-	@Column(name="OD_RECEIVER_POST", nullable=true)
-	private String odReceiverPost;
-	
-	@Column(name="OD_RECEIVER_ADDR", nullable=true)
-	private String odReceiverAddr;
-	
-	@Column(name="OD_RECEIVER_ADDR2", nullable=true)
-	private String odReceiverAddr2;
-	
-	@Column(name="OD_RECEIVER_TEL", nullable=true)
-	private String odReceiverTel;
-	
-	@Column(name="OD_RECEIVER_MOBILE", nullable=true)
-	private String odReceiverMobile;
-	
-	@Column(name="OD_RECEIVER_REMARK", nullable=true)
-	private String odReceiverRemark;
-	
-	@Column(name="OD_REMARK", nullable=true)
-	private String odRemark;
-	
-	@Column(name="OD_PASSWORD", nullable=true)
-	private String odPassword;
-	
-	@Column(name="PM_KEY", nullable=true)
-	private String pmKey;
-	
-	@Column(name="OD_STATUS", nullable=true, insertable = false)
-	private String odStatus;
-	
-	@Column(name="MEM_KEY", nullable=false)
 	private String memKey;
 	
+	private String deliveryPrice;
 	
-	/*
-	 * @OneToMany(mappedBy="odKey") private List<OrderProductEntity> orderProducts =
-	 * new ArrayList<OrderProductEntity>();
-	 */
+	private String salesPrice;
+	
+	private String odPrice;
+	
+	private String odCustName;
+	
+	private String odCustPost;
+	
+	private String odCustAddr;
+	
+	private String odCustAddr2;
+	
+	private String odCustTel;
+	
+	private String odCustMobile;
+	
+	private String odCustEmail;
+	
+	private String odReceiverName;
+	
+	private String odReceiverPost;
+	
+	private String odReceiverAddr;
+	
+	private String odReceiverAddr2;
+	
+	private String odReceiverTel;
+	
+	private String odReceiverMobile;
+	
+	private String odReceiverRemark;
+	
+	private String odRemark;
+	
+	private String odPassword;
+	
+	private String pmKey;
+	
+	private String pmNm;
+	
+	private int pmQuantity;
+	
+	private String odStatus;
+	
+	private String cartStatus;
+	
+	private String regDt;
+	
+	private String modDt;
+	
+	private String fromDt;
+	
+	private String toDt;
+	
+	private String[] _odStatus;
 	
 
 	public String getOdKey() {
@@ -123,20 +83,20 @@ public class OrderEntity extends DateUtils {
 		this.cartKey = cartKey;
 	}
 
+	public String getMemKey() {
+		return memKey;
+	}
+
+	public void setMemKey(String memKey) {
+		this.memKey = memKey;
+	}
+
 	public String getDeliveryPrice() {
 		return deliveryPrice;
 	}
 
 	public void setDeliveryPrice(String deliveryPrice) {
 		this.deliveryPrice = deliveryPrice;
-	}
-
-	public String getOdPrice() {
-		return odPrice;
-	}
-
-	public void setOdPrice(String odPrice) {
-		this.odPrice = odPrice;
 	}
 	
 	public String getSalesPrice() {
@@ -145,6 +105,14 @@ public class OrderEntity extends DateUtils {
 
 	public void setSalesPrice(String salesPrice) {
 		this.salesPrice = salesPrice;
+	}
+
+	public String getOdPrice() {
+		return odPrice;
+	}
+
+	public void setOdPrice(String odPrice) {
+		this.odPrice = odPrice;
 	}
 
 	public String getOdCustName() {
@@ -282,6 +250,22 @@ public class OrderEntity extends DateUtils {
 	public void setPmKey(String pmKey) {
 		this.pmKey = pmKey;
 	}
+	
+	public String getPmNm() {
+		return pmNm;
+	}
+
+	public void setPmNm(String pmNm) {
+		this.pmNm = pmNm;
+	}
+	
+	public int getPmQuantity() {
+		return pmQuantity;
+	}
+
+	public void setPmQuantity(int pmQuantity) {
+		this.pmQuantity = pmQuantity;
+	}
 
 	public String getOdStatus() {
 		return odStatus;
@@ -291,24 +275,54 @@ public class OrderEntity extends DateUtils {
 		this.odStatus = odStatus;
 	}
 
-	public String getMemKey() {
-		return memKey;
+	public String getCartStatus() {
+		return cartStatus;
 	}
 
-	public void setMemKey(String memKey) {
-		this.memKey = memKey;
+	public void setCartStatus(String cartStatus) {
+		this.cartStatus = cartStatus;
 	}
 
+	public String getRegDt() {
+		return regDt;
+	}
 
-	/*
-	 * public List<OrderProductEntity> getOrderProducts() { return orderProducts; }
-	 * 
-	 * public void setOrderProducts(List<OrderProductEntity> orderProducts) {
-	 * this.orderProducts = orderProducts; }
-	 * 
-	 * public void addOrderProducts(OrderProductEntity orderProductEntity) {
-	 * this.orderProducts.add(orderProductEntity); }
-	 */
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
+	}
+
+	public String getModDt() {
+		return modDt;
+	}
+
+	public void setModDt(String modDt) {
+		this.modDt = modDt;
+	}
+
+	public String getFromDt() {
+		return fromDt;
+	}
+
+	public void setFromDt(String fromDt) {
+		this.fromDt = fromDt;
+	}
+
+	public String getToDt() {
+		return toDt;
+	}
+
+	public void setToDt(String toDt) {
+		this.toDt = toDt;
+	}
+
+	public String[] get_odStatus() {
+		return _odStatus;
+	}
+
+	public void set_odStatus(String[] _odStatus) {
+		this._odStatus = _odStatus;
+	}
+	
 	
 	
 	

@@ -10,4 +10,6 @@ public interface ProductRepositoryCustom {
     public Page<ProductDto> selectProductList(ProductDto dto, Pageable pageable);
 
     public ProductDto selectProductDetail(ProductDto dto);
+
+    public List<ProductDto> selectPopularProductList();
 }
