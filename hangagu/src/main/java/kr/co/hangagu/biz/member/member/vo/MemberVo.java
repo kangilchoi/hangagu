@@ -13,6 +13,7 @@ public class MemberVo {
 	private String memTel;
 	private String memPhone;
 	private String memMail;
+	private String memPost;
 	private char memMailReceptYn;
 	private String memBirth;
 	private String memArea;
@@ -26,7 +27,7 @@ public class MemberVo {
 		super();
 	}
 	public MemberVo(String memKey, String memClassCd, String memId, String memPw, String memNm, String memAddr,
-			String memDetailAddr, String memTel, String memPhone, String memMail, char memMailReceptYn, String memBirth,
+			String memDetailAddr, String memTel, String memPhone, String memMail, String memPost, char memMailReceptYn, String memBirth,
 			String memArea, String memGrade, char termsAgreeYn, LocalDateTime regDt, LocalDateTime modDt,
 			char deleteYn) {
 		super();
@@ -40,6 +41,7 @@ public class MemberVo {
 		this.memTel = memTel;
 		this.memPhone = memPhone;
 		this.memMail = memMail;
+		this.memPost = memPost;
 		this.memMailReceptYn = memMailReceptYn;
 		this.memBirth = memBirth;
 		this.memArea = memArea;
@@ -108,6 +110,12 @@ public class MemberVo {
 	}
 	public void setMemMail(String memMail) {
 		this.memMail = memMail;
+	}
+	public String getMemPost() {
+		return memPost;
+	}
+	public void setMemPost(String memPost) {
+		this.memPost = memPost;
 	}
 	public char getMemMailReceptYn() {
 		return memMailReceptYn;

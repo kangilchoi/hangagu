@@ -3,6 +3,8 @@ package kr.co.hangagu.biz.member.order.service.impl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -16,13 +18,16 @@ import kr.co.hangagu.biz.common.mysql.repository.HangaguFunctionRepository;
 import kr.co.hangagu.biz.member.car.dto.CartDto;
 import kr.co.hangagu.biz.member.cart.entity.CartEntity;
 import kr.co.hangagu.biz.member.cart.repository.CartRepository;
+import kr.co.hangagu.biz.member.order.dao.OrderDao;
 import kr.co.hangagu.biz.member.order.dto.OrderDto;
 import kr.co.hangagu.biz.member.order.entity.OrderEntity;
 import kr.co.hangagu.biz.member.order.repository.OrderRepository;
 import kr.co.hangagu.biz.member.order.service.OrderService;
 import kr.co.hangagu.common.constants.HangaguConstant;
+import kr.co.hangagu.common.constants.HangaguConstant.Code;
 import kr.co.hangagu.common.constants.PrimaryKeyType;
 import kr.co.hangagu.common.dto.ResultDto;
+import kr.co.hangagu.common.response.Response;
 import kr.co.hangagu.common.util.UpdateUtils;
 
 @Service
@@ -36,6 +41,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
 	private HangaguFunctionRepository functionRepository;
+	
+	@Autowired
+	private OrderDao orderDao;
 	
 	@Override
 	public ResultDto findByMemKey(OrderDto dto, Pageable pageable) {
@@ -66,7 +74,8 @@ public class OrderServiceImpl implements OrderService {
 		LocalDateTime now = LocalDateTime.now();
 	  
 		OrderEntity ord = new OrderEntity();
-		ord.setOdKey(functionRepository.makeKeyFunction(PrimaryKeyType.ORDER.getValue().toString())); ord.setMemKey(dto.getMemKey());
+		ord.setOdKey(functionRepository.makeKeyFunction(PrimaryKeyType.ORDER.getValue().toString())); 
+		ord.setMemKey(dto.getMemKey());
 		ord.setCartKey(dto.getCartKey());
 		ord.setDeliveryPrice(dto.getDeliveryPrice());
 		ord.setSalesPrice(dto.getSalesPrice()); 
@@ -158,5 +167,20 @@ public class OrderServiceImpl implements OrderService {
 		
 		return resultDto;
 		
+	}
+	
+	@Override
+	//마이페이지 주문 내역
+	public Response myPage(String memId) {
+		Response res = new Response();
+		
+		Optional<List<Object>> o = orderDao.myPage(memId);
+		
+		if(o.isPresent()) {
+			res.setCode(Code.SUCCESS.getKey());
+			res.setData(o.get());
+		}
+		
+		return res;
 	}
 }

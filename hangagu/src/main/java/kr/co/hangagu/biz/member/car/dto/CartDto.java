@@ -30,6 +30,8 @@ public class CartDto {
 	
 	private String pmColor;
 	
+	private String pmImgSrc;
+	
 	private String regDt;
 	
 	private String modDt;
@@ -132,6 +134,14 @@ public class CartDto {
 
 	public void setPmColor(String pmColor) {
 		this.pmColor = pmColor;
+	}
+	
+	public String getPmImgSrc() {
+		return pmImgSrc;
+	}
+
+	public void setPmImgSrc(String pmImgSrc) {
+		this.pmImgSrc = pmImgSrc;
 	}
 
 	public String getRegDt() {

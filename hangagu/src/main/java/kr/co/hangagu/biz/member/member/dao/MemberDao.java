@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import kr.co.hangagu.biz.member.member.vo.Member;
+import kr.co.hangagu.biz.member.member.entity.Member;
+
 
 public interface MemberDao extends JpaRepository<Member, Integer>{
 	Optional<Member> findByMemId(String memId);
@@ -15,7 +16,11 @@ public interface MemberDao extends JpaRepository<Member, Integer>{
 	@Query(nativeQuery = true, value="SELECT hangagu.make_key(:keyType)")
     Optional<String> makeKey(@Param("keyType") String keyType);
 	
-	List<Member> findByMemMailAndDeleteYn(String memMail, char DeleteYn);
+	List<Member> findByMemMailAndMemNmAndMemGradeAndDeleteYn(String memMail, String memNm, String memGrade, char deleteYn);
+	
+	List<Member> findByMemPhoneAndMemNmAndMemGradeAndDeleteYn(String memPhone, String memNm, String memGrade, char deleteYn);
+	
+	Optional<Member> findByMemIdAndMemMailAndMemNmAndMemGradeAndDeleteYn(String memId, String memMail, String memNm, String memGrade, char deleteYn);
 	
 	Optional<Member> findByMemIdAndDeleteYn(String memId, char DeleteYn);
 

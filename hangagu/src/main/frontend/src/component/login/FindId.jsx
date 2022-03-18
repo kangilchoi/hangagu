@@ -38,29 +38,48 @@ function FindId(){
             setInputPhone(value);
     }
 
+    
+
     const clickFindId = async(e) =>{
         e.preventDefault();
-        try{
-            let response;
-            if(findType === 'email')
-                response = await axios.get('http://localhost:8888/member/findIdByEmail',{params: {"email":inputEmail,"grade":memGrade,"name":inputNm}});
-            else
-                response = await axios.get('http://localhost:8888/member/findIdByPhone',{params: {"phone":inputPhone,"grade":memGrade,"name":inputNm}});
-            if(response.data.code >0){
-                history.push({
-                    pathname: "/findIdResult",
-                    state: {list: response.data.data}
-                });
-            }else if(response.data.code == 0){
-                alert("조회되는 회원이 없습니다.");
-            }else{
+
+        let url = '/auth/';
+            let params = {
+                "memMail":inputEmail
+                ,"memPhone":inputPhone
+                ,"memGrade":memGrade
+                ,"memNm":inputNm
+            };
+
+            if(findType === 'email'){
+                url+='findIdByMail';
+            }
+            else{
+                url+='findIdByPhone';
+            }
+
+            axios.post(url,params).then(response => {
+                if(response.data.code >0){
+                    alert(response.data.data.length+'건 조회되었습니다.');
+                    history.push({
+                        pathname: "/login/findIdResult",
+                        state: {list: response.data.data}
+                    });
+                }else if(response.data.code == 0){
+                    alert("조회되는 회원이 없습니다.");
+                }else{
+                    return(
+                        <div>error</div>
+                    )
+                }
+        
+            }).catch(error => {
+                // ... 에러 처리
+                console.log(error);
                 return(
                     <div>error</div>
                 )
-            }
-        } catch (e) {
-        console.log(e);
-        }
+            });
     };
 
     return(

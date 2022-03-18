@@ -70,6 +70,7 @@ public class OrderRepositoryImpl extends QuerydslRepositorySupport implements Or
 										, ord.modDt.as("modDt")
 										, ord.odStatus.as("odStatus")
 										, prd.pmNm.as("pmNm")
+										, prd.pmImgSrc.as("pmImgSrc")
 										, crt.pmQuantity.as("pmQuantity")
 										, crt.cartKey.as("cartKey")
 									)

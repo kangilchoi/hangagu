@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
+import * as Auth from 'component/Auth';
 
 /*css*/
 import "css/myPage/memberModify.css"
@@ -41,7 +42,9 @@ function CheckPw(){
         }
 
         try{
-            const response = await axios.get('http://localhost:8888/member/isCorrePwById/kangil',{params: {memPw:pw}});
+            let username = Auth.getLoggedInUserName();
+
+            const response = await axios.get('/member/isCorrectPwById/'+username,{params: {memPw:pw}});
             if(response.data.code >=0){
                 setIsCorrectPw(true);
                 alert("확인되었습니다.");

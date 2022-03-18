@@ -1,8 +1,21 @@
-import React from 'react'
-import { Link, Route, BrowserRouter as Router } from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Test from "component/Test";
+
+// import HeaderComponent from './component/HeaderComponent';
+// import FooterComponent from './component/FooterComponent';
+
 import Main from "component/Main";
+
+import AddOrderComponent from 'component/order/AddOrderComponent';
+import ListOrderComponent from 'component/order/ListOrderComponent';
+import ListOrderRMComponent from 'component/order/ListOrderRMComponent';
+import CompleteOrderComponent from 'component/order/CompleteOrderComponent';
+
+import ListCartComponent from 'component/cart/ListCartComponent';
+
+import ListWishComponent from 'component/wishList/ListWishComponent';
+
 import Login from "component/login/Login";
 import MyPage from "component/myPage/MyPage";
 import Profile from "component/myPage/Profile";
@@ -15,32 +28,47 @@ import FindIdResult from "component/login/FindIdResult";
 import FindPassword from "component/login/FindPassword";
 import FindPasswordQuestion from "component/login/FindPasswordQuestion";
 import FindPasswordResult from "component/login/FindPasswordResult";
-import Join from "component/login/Join";
+
+import Header from 'component/Header';
+import Footer from 'component/Footer';
 
 function App() {
 
   return (
-    <Router>
-      <main>
-        <Route exact path = "/test" component={Test} />
-        <Route exact path = "/main" component={Main} />
-        <Route exact path = "/login" component={Login} />
-        <Route exact path = "/myPage" component={MyPage} />
-        <Route exact path = "/profile" component={Profile} />
-        <Route exact path = "/checkPassword" component={CheckPassword} />
-        <Route exact path = "/updatePassword" component={UpdatePassword} />
-        <Route exact path = "/dropMember" component={DropMember} />
-        <Route exact path = "/join" component={Join} />
-        <Route exact path = "/Profile" component={Profile} />
-
-        <Route exact path="/login/findId" component={FindId} />
-        <Route exact path="/login/findIdResult" component={FindIdResult} />
-        <Route exact path="/login/findPassword" component={FindPassword} />
-        <Route exact path="login/FindPasswordQuestion" component={FindPasswordQuestion} />
-        <Route exact path="/login/findPasswordResult" component={FindPasswordResult} />
-        <Route exact path="/login/join" component={Join} />
-      </main>
-    </Router>
+    <div>
+      <Router>
+        <Header/>
+        <br/><br/><br/><br/><br/>
+          <div className="container">
+            <Switch>
+              <Route path = "/header" component={Header} />
+              <Route path = "/myPage" component={MyPage} />
+              <Route path = "/profile" component={Profile} />
+              <Route path = "/checkPassword" component={CheckPassword} />
+              <Route path = "/updatePassword" component={UpdatePassword} />
+              <Route path = "/dropMember" component={DropMember} />
+              <Route path = "/join" component={Join} />
+              <Route path = "/login/findId" component={FindId} />
+              <Route path = "/login/findIdResult" component={FindIdResult} />
+              <Route path = "/login/findPassword" component={FindPassword} />
+              <Route path = "login/FindPasswordQuestion" component={FindPasswordQuestion} />
+              <Route path = "/login/findPasswordResult" component={FindPasswordResult} />
+              <Route path = "/login/join" component={Join} />
+              <Route path = "/main" component={Main} />
+              <Route path = "/login" component={Login} />
+              <Route path = "/" exact component = {Main}></Route>
+              <Route path = "/order/get" component = {ListOrderComponent}></Route>
+              <Route path = "/order/getrm" component = {ListOrderRMComponent}></Route>
+              <Route path = "/order/addView" component = {AddOrderComponent}></Route>
+              <Route path = "/order/orderResult" component = {CompleteOrderComponent}></Route>
+              <Route path = "/cart/get" component = {ListCartComponent}></Route>
+              <Route path = "/interestProduct/get" component = {ListWishComponent}></Route>
+            </Switch>
+          </div>
+        <Footer/>
+      </Router>
+    </div>
   );
 }
+
 export default App;

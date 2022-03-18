@@ -11,10 +11,27 @@ import slide3 from "img/slide3.jpg"
 
 function Main(){
 
+    const [bestItems, setBestItems] = useState([]);
+
     //Hook(useEffect) : 컴포넌트 랜더링마다 실행
     useEffect(() => {
-
+        fetchNewItem();
     },[]);
+
+    const fetchNewItem = async() => {
+        try{
+            const response = await axios.get('/product/popular/list');
+            if(response.data.code >=0){
+                setBestItems(response.data.data);
+            }else{
+                return(
+                    <div>error</div>
+                )
+            }
+        } catch (e) {
+        console.log(e);
+        }
+    }
 
     return(
         <div>
@@ -27,10 +44,18 @@ function Main(){
                 <h2><span style={{fontWeight: "bold"}}>BEST ITEM</span></h2>
             </div>
             <div>
-                <img src={slide3} alt="" style={{width:"20%", marginLeft: "15%"}} />
-                <img src={slide3} alt="" style={{width:"20%", marginLeft: "15%"}} />
-                <img src={slide3} alt="" style={{width:"20%", marginLeft: "15%"}} />
-                <img src={slide3} alt="" style={{width:"20%", marginLeft: "15%"}} />
+                <ul>
+                {
+                    bestItems.map((item) => {
+                        return (
+                            <li style={{width:25+'%', float:'left'}}>
+                                <img src={item.pmImgSrc} alt="" style={{maxWidth:300+'px', width:100+'%'}} />
+                            </li>
+                        )
+                    })
+                }
+                <li style={{float:'none', clear:'both'}}></li>
+                </ul>
             </div>
             {/* 신상품 */}
             <div className="m_title">

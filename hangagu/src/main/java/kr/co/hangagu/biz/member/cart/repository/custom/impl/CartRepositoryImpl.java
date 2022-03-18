@@ -46,6 +46,7 @@ public class CartRepositoryImpl extends QuerydslRepositorySupport implements Car
 										, prd.pmSalesRate.as("pmSalesRate")
 										, prd.pmDeliveryPrice.as("pmDeliveryPrice")
 										, prd.pmColor.as("pmColor")
+										, prd.pmImgSrc.as("pmImgSrc")
 										)
 									)
 									.from(crt)
@@ -75,7 +76,8 @@ public class CartRepositoryImpl extends QuerydslRepositorySupport implements Car
 								crt.regDt.as("regDt"),
 								prd.pmPrice.as("pmPrice"),
 								prd.pmDeliveryPrice.as("pmDeliveryPrice"),
-								prd.pmSalesRate.as("pmSalesRate")
+								prd.pmSalesRate.as("pmSalesRate"),
+								prd.pmImgSrc.as("pmImgSrc")
 						)
 					)
 					.from(crt)

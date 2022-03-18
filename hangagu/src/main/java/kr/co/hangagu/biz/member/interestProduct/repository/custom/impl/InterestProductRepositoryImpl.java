@@ -64,6 +64,7 @@ public class InterestProductRepositoryImpl extends QuerydslRepositorySupport imp
 						, prd.pmColor.as("pmColor")
 						, prd.pmPrice.as("pmPrice")
 						, prd.pmDeliveryPrice.as("pmDeliveryPrice")
+						, prd.pmImgSrc.as("pmImgSrc")
 					)
 				)
 				.from(ipd)

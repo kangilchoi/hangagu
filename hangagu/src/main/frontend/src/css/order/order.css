@@ -126,22 +126,25 @@ span.ec-base-help, p.ec-base-help, ul.ec-base-help li {
 .xans-order-form .title h3 {
     color: #353535;
     font-size: 12px;
+    line-height: inherit;
 }
 
 .xans-order-form .orderListArea .title .button {
     position: absolute;
     right: 10px;
-    top: 8px;
+    top: -3px;
 }
 
 .xans-order-form .boardList {
     margin: 0 0 1px;
     border: 1px solid #d7d5d5;
+    border-top: 0;
     color: #353535;
     line-height: 1.5;
 }
 
 .xans-order-form .boardList table {
+    border-top: 1px solid #d7d5d5;
 }
 
 table {
@@ -164,6 +167,7 @@ caption {
     border-right: 1px solid #e9e9e9;
     font-weight: normal;
     background: #fbfafa;
+    text-align: center;
 }
 
 th, td {
@@ -526,6 +530,7 @@ textarea {
     border-left: 1px solid #e9e9e9;
     line-height: 39px;
     background: #fbfafa;
+    text-align: center;
 }
 
 .xans-order-form .totalArea .summary .price {
@@ -829,6 +834,10 @@ div.ec-base-help ul, div.ec-base-help ol {
     margin: 15px 0 0 11px;
 }
 
+div.ec-base-help ul, div.ec-base-help ol {
+    padding-left: 0 !important;
+}
+
 div.ec-base-help h4:first-child {
     margin-top: 13px;
 }
@@ -859,4 +868,109 @@ div.ec-base-help ol .item4 {
 
 div.ec-base-help ol .item5 {
     background-position: -284px -400px;
+}
+
+.total {
+    margin: 32px 0;
+}
+
+.total h4 {
+    float: left;
+}
+
+.total .price {
+    float: right;
+    margin: 0;
+}
+
+.total .inputTypeText {
+    text-align: right;
+    clear: none;
+    border: 0px;
+    float: none;
+    font-size: 23px;
+    vertical-align: text-bottom;
+    font-weight: bold;
+    color: #508bed;
+}
+
+.total .inputSpan {
+    font-size: 23px;
+    font-weight: bold;
+    color: #508bed;
+}
+
+.total .paymentAgree {
+    float: none;
+    clear: both;
+}
+
+.total .button {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.total .button button {
+    color: #fff;
+    border: 1px solid #333;
+    background: #333;
+    font-size: 16px;
+    margin: 0 0 7px;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 4px;
+    font-weight: normal;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.total .button input {
+    color: #fff;
+    border: 1px solid #333;
+    background: #333;
+    font-size: 16px;
+    margin: 0 0 7px;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 4px;
+    font-weight: normal;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.total .mileage {
+    position: relative;
+    margin: 0 0 10px;
+    padding: 0;
+    border: 1px solid #d7d5d5;
+    background: #fff;
+    padding: 10px 28px;
+}
+
+.total .mileage p {
+    position: relative;
+    cursor: pointer;
+    margin: 0 10px 0 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.total .mileage p span {
+    position: relative;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+}
+
+.total .mileage ul {
+    margin-top: 16px;
+    padding: 0 23px;
+}
+
+.total .mileage ul li span {
+    float: right;
+}
+
+.total .mileage #mAllMileageSum {
+    float: right;
 }

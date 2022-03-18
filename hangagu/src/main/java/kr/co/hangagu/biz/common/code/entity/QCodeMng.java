@@ -52,4 +52,3 @@ public class QCodeMng extends EntityPathBase<CodeMng> {
     }
 
 }
-

@@ -73,10 +73,10 @@ button {
 }
 #header {
 	z-index: 50;
-	position: fixed;
+	position: fixed !important;
 	top: 0px;
-	margin-left: 0px;
-	width: 1903px;
+	margin-left: 0px !important;
+	width: 1903px !important;
 	left: 0px;
 	padding: 0;
 }
@@ -1086,4 +1086,141 @@ hr.layout {
 }
 .ic_qna{
 	width: 35px;
+}
+
+.right_bt_page .right_search_bt {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    z-index: 8000;
+    cursor: pointer;
+    padding: 0;
+    margin: 95px 0 0 0;
+    border: 0;
+    font-size: 0px;
+    background: rgba( 0,0,0,0.05 );
+    text-align: center;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.right_bt_page .right_search_bt button, .right_bt_page .right_search_bt img {
+    display: inline-block;
+    vertical-align: middle;
+    height: auto;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    background: rgba( 0,0,0,0 );
+	width: 19px !important;
+	text-align: center;
+}
+.right_bt_page .right_search_bt .text {
+    display: none;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 60px;
+    line-height: 11px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba( 0,0,0,1 );
+    margin: -10px 10px 0 0;
+    padding: 5px 0;
+    background: rgba( 0,0,0,0.05 );
+    -moz-animation: animateleft 0.2s cubic-bezier(0.38,1.4,0.78,1.26);
+    -webkit-animation: animateleft 0.2s cubic-bezier(0.38,1.4,0.78,1.26);
+    animation: animateleft 0.2s cubic-bezier(0.38,1.4,0.78,1.26);
+    -moz-animation-name: right_search_bt;
+    -webkit-animation-name: right_search_bt;
+    animation-name: right_search_bt;
+}
+.right_bt_page .right_search_bt:hover {
+    background: rgba( 0,0,0,0.2 );
+}
+.right_bt_page .right_search_bt:hover .text {
+    display: block;
+}
+.right_bt_page .right_search_bt:after {
+    display: inline-block;
+    height: 100%;
+    content: "";
+    vertical-align: middle;
+}
+.right_bt_page .right_kakao_bt {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    z-index: 8000;
+    cursor: pointer;
+    padding: 0;
+    margin: 155px 0 0 0;
+    border: 0;
+    font-size: 0px;
+    background: rgba( 0,0,0,0.05 );
+    text-align: center;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.right_bt_page .right_kakao_bt a, .right_bt_page .right_kakao_bt img {
+    display: inline-block;
+    vertical-align: middle;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: rgba( 0,0,0,0 );
+	width: 19px !important;
+	text-align: center;
+}
+.right_bt_page .right_kakao_bt .text {
+    display: none;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 85px;
+    line-height: 11px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba( 0,0,0,1 );
+    margin: -10px 10px 0 0;
+    padding: 5px 0;
+    background: rgba( 0,0,0,0.05 );
+    -moz-animation: animateleft 0.2s cubic-bezier(0.38,1.4,0.78,1.26);
+    -webkit-animation: animateleft 0.2s cubic-bezier(0.38,1.4,0.78,1.26);
+    animation: animateleft 0.2s cubic-bezier(0.38,1.4,0.78,1.26);
+    -moz-animation-name: right_kakao_bt;
+    -webkit-animation-name: right_kakao_bt;
+    animation-name: right_kakao_bt;
+}
+.right_bt_page .right_kakao_bt:hover {
+    background: #fae100;
+}
+.right_bt_page .right_kakao_bt:hover .text {
+    display: block;
+}
+.right_bt_page .right_kakao_bt:after {
+    display: inline-block;
+    height: 100%;
+    content: "";
+    vertical-align: middle;
 }

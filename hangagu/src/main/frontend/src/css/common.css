@@ -5,18 +5,18 @@ html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form
 
 @media all and (min-width:480px){
 	body, code {
-    font-size: 0.75em;
-    font-family: 'Noto Sans','Nanum Gothic',Arial,sans-serif;
-    line-height: 1.8;
-    color: #888;
-    -webkit-text-size-adjust: 100%;
+        font-size: 0.75em !important;
+        font-family: 'Noto Sans','Nanum Gothic',Arial,sans-serif !important;
+        line-height: 1.8 !important;
+        color: #888 !important;
+        -webkit-text-size-adjust: 100% !important;
 	}
 	#contents {
-    width: 100%;
-	position: relative;
- 	max-width: 1240px; 
-    margin: 0 auto;
-    padding: 0 10px;
+        width: 100%;
+        position: relative;
+        max-width: 1240px; 
+        margin: 0 auto;
+        padding: 0 10px;
 	}
 }	
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import * as Auth from 'component/Auth';
+import { Link } from 'react-router-dom'
 
 /*css*/
 import "css/myPage/myPage.css"
@@ -31,14 +33,16 @@ function MyPage(){
 			setMemberGrade(null);
 			setMemloading(true);
 
-			//axios
-			const response = await axios.get(
-			  'http://localhost:8888/member/getMember/MK210004'
-			);
+			let username = Auth.getLoggedInUserName();
 
+			//axios
+			const response = await axios.get('/member/getGradeInfo/'+username);
+			//console.log(response.data.data.memGrade);
 			//setter
-			setMemberNm(response.data.data.memNm);
-			setMemberGradeInfo(response.data.data.memClassCd);
+			if(response.data.data){
+				setMemberNm(response.data.data.memNm);
+				setMemberGradeInfo(response.data.data.memGrade);
+			}
 
 		  } catch (e) {
 			setMemError(e);
@@ -48,13 +52,12 @@ function MyPage(){
 		};
 		
 		//setter
-		const setMemberGradeInfo = (memClassCd) => {
+		const setMemberGradeInfo = (memGrade) => {
 			let res='';
 
-			if(memClassCd==='STAFF'){
+			if(memGrade==='STAFF'){
 				res = '일반'	
 			}
-		
 			setMemberGrade(res);
 		}
 
@@ -64,9 +67,13 @@ function MyPage(){
 			  //초기화
 			  initDeliverInfo();
   
+			  //let username = Auth.getLoggedInUserName();
+
+              let memKey = await(Auth.getLoggedInMemKey());
+
 			  //axios
 			  const response = await axios.get(
-				'http://localhost:8888/member/myPage/MK210004'
+				'/member/myPage/'+memKey
 			  );
 			  //setter
 			  setDeliverInfo(response.data);
@@ -124,7 +131,9 @@ function MyPage(){
 	//if(!deliverInfo) return null;
 
 	return(
+		
 	<div id="wrap">
+
 		<div id="container">
 			<div id="contents">
 				<div className="titleArea">

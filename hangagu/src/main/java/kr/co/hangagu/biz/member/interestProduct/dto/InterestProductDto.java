@@ -16,6 +16,8 @@ public class InterestProductDto {
 	
 	private String pmDeliveryPrice;
 	
+	private String pmImgSrc;
+	
 	private String memKey;
 	
 	private String regDt;
@@ -72,6 +74,14 @@ public class InterestProductDto {
 
 	public void setPmDeliveryPrice(String pmDeliveryPrice) {
 		this.pmDeliveryPrice = pmDeliveryPrice;
+	}
+	
+	public String getPmImgSrc() {
+		return pmImgSrc;
+	}
+
+	public void setPmImgSrc(String pmImgSrc) {
+		this.pmImgSrc = pmImgSrc;
 	}
 
 	public String getMemKey() {

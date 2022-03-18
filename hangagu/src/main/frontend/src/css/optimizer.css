@@ -2816,11 +2816,12 @@ div.ec-base-help ul li {
 
 .ec-base-tab.grid7 .menu li {
 	width: 14.8%;
-	width: 15% \0/;
+	/* width: 15% \0/; */
 }
 
 .ec-base-tab.grid7 .menu li:first-child {
-	width: 13% \0/;
+	/* width: 13% \0/; */
+	width: 13%;
 }
 
 .ec-base-tab-2 {

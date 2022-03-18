@@ -50,6 +50,8 @@ public class OrderDto {
 	
 	private String pmNm;
 	
+	private String pmImgSrc;
+	
 	private int pmQuantity;
 	
 	private String odStatus;
@@ -259,6 +261,14 @@ public class OrderDto {
 		this.pmNm = pmNm;
 	}
 	
+	public String getPmImgSrc() {
+		return pmImgSrc;
+	}
+
+	public void setPmImgSrc(String pmImgSrc) {
+		this.pmImgSrc = pmImgSrc;
+	}
+
 	public int getPmQuantity() {
 		return pmQuantity;
 	}
