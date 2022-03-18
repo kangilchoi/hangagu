@@ -72,6 +72,7 @@ public class ProductController {
         return resultDto;
     }
 
+}
 
     @RequestMapping(value = {"popular/list"}, method = RequestMethod.GET)
     public @ResponseBody
@@ -80,4 +81,3 @@ public class ProductController {
         return resultDto;
     }
 
-}
