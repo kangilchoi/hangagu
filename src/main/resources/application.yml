@@ -4,8 +4,8 @@ spring:
     active: dev
 
 ##webcontents 설정
-  thymeleaf:
-    prefix: classpath:/static/view/
+  #thymeleaf:
+    #prefix: classpath:/static/view/
   
   mvc:
     view:
@@ -55,4 +55,6 @@ logging:
             sql:
               BasicBinder: TRACE
 ## 시큐리티 설정
-
+##jwt
+jwt:
+  secret: jwtsecretkey

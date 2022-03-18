@@ -15,14 +15,21 @@ import FindIdResult from "component/login/FindIdResult";
 import FindPassword from "component/login/FindPassword";
 import FindPasswordQuestion from "component/login/FindPasswordQuestion";
 import FindPasswordResult from "component/login/FindPasswordResult";
-import Join from "component/login/Join";
+import Header from 'component/Header';
+import Footer from 'component/Footer';
+
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function App() {
 
   return (
     <Router>
+      <Header>
+      </Header>
+      <br/><br/><br/><br/><br/>
       <main>
-        <Route exact path = "/test" component={Test} />
+        <Route exact path = "/header" component={Header} />
         <Route exact path = "/main" component={Main} />
         <Route exact path = "/login" component={Login} />
         <Route exact path = "/myPage" component={MyPage} />
@@ -31,8 +38,6 @@ function App() {
         <Route exact path = "/updatePassword" component={UpdatePassword} />
         <Route exact path = "/dropMember" component={DropMember} />
         <Route exact path = "/join" component={Join} />
-        <Route exact path = "/Profile" component={Profile} />
-
         <Route exact path="/login/findId" component={FindId} />
         <Route exact path="/login/findIdResult" component={FindIdResult} />
         <Route exact path="/login/findPassword" component={FindPassword} />
@@ -40,6 +45,8 @@ function App() {
         <Route exact path="/login/findPasswordResult" component={FindPasswordResult} />
         <Route exact path="/login/join" component={Join} />
       </main>
+      <Footer>
+		</Footer>
     </Router>
   );
 }

@@ -41,9 +41,9 @@ public interface OrderDao extends JpaRepository<OrderEntity, Integer> {
 	
 	@Query(nativeQuery = true, value="select OD_STATUS, count(*) as cnt "
 		 + "from hangagu.ORDER_TB "
-		 + "where MEM_KEY = :memKey "
+		 + "where MEM_KEY = :memId "
 		 + "and IFNULL(MOD_DT,REG_DT) >= DATE_ADD(NOW(), INTERVAL -3 MONTH) "
 		 + "group by OD_STATUS")
-	Optional<List<Object>> myPage(@Param("memKey") String memKey);
+	Optional<List<Object>> myPage(@Param("memId") String memId);
 }
 

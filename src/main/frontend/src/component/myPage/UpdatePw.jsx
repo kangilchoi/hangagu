@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import {useLocation} from "react-router";
+import * as Auth from 'component/Auth';
+
 /*css*/
 import "css/myPage/memberModify.css"
 
@@ -17,15 +19,23 @@ function UpdatePw(){
     const location = useLocation();
 
     const [isCorrectPw, setIsCorrectPw] = useState(false);   //pw확인 완료
-    const [pw, setPw] = useState(location.state.pw);
+    const [pw, setPw] = useState('');
 
     const [newPw1, setNewPw1] = useState('');   //pw확인 완료
     const [newPw1V, setNewPw1V] = useState(false);
 
     const [newPw2, setNewPw2] = useState('');
+
+    const [id, setId] = useState('');
     
     //Hook(useEffect) : 컴포넌트 랜더링마다 실행
     useEffect(() => {
+        if(location.state.pw){
+            setPw(location.state.pw);
+            setId(Auth.getLoggedInUserName());
+        }else{
+            setId(location.state.id);
+        }
 
     },[]);
 
@@ -97,8 +107,7 @@ function UpdatePw(){
                 return;
             }
             try{
-                
-                const response = await axios.get('http://localhost:8888/member/updatePwById/kangil',{params: {memPw:newPw1}});
+                const response = await axios.get('/auth/updatePwById/'+id,{params: {memPw:newPw1}});
                 if(response.data.code >=0){
                     alert("변경되었습니다.");
                 }else{
@@ -112,8 +121,9 @@ function UpdatePw(){
             return;
         }
 
-        //회원정보로 이동
-        history.push("/profile");
+        //로그인 이동
+        Auth.logout();
+        history.push("/login");
     };
 
     //axios member(pw)

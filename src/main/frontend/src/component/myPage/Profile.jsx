@@ -3,6 +3,7 @@ import axios from 'axios';
 import PopupDom from 'component/PopupDom';
 import PopupPostCode from 'component/PopupPostCode';
 import { Link } from 'react-router-dom'
+import * as Auth from 'component/Auth';
 
 /*css*/
 import "css/myPage/memberModify.css"
@@ -21,7 +22,7 @@ function Profile(){
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     const [member, setMember] = useState({
-        memKey:'MK210004',
+        memKey:null,
         memClassCd:null,
         memId:null,
         memPw:null,
@@ -35,13 +36,11 @@ function Profile(){
         memMailReceptYn:false,
         memArea:null,
         memGrade:null,
-        regDt:null,
-        modDt:null,
         deleteYn:null,
     });
 
     const [validation, setValidate] = useState({
-        memClassCd:true,
+        memGrade:true,
         memId:true,
         memPw:true,
         memNm:true,
@@ -55,8 +54,8 @@ function Profile(){
     });
     
     // 비구조화 할당을 통해 값 추출
-    const {memKey,memClassCd,memId,memPw,memNm,memBirth,memAddr,memDetailAddr,memPhone,memTel,memMail,memMailReceptYn,modDt} = member; 
-    const {memClassCdV,memIdV,memPwV,memNmV,memBirthV,memAddrV,memDetailAddrV,memPhoneV,memTelV,memMailV,memMailReceptYnV} = validation; 
+    const {memKey,memGrade,memId,memPw,memNm,memBirth,memAddr,memDetailAddr,memPhone,memTel,memMail,memMailReceptYn} = member; 
+    const {memGradeV,memIdV,memPwV,memNmV,memBirthV,memAddrV,memDetailAddrV,memPhoneV,memTelV,memMailV,memMailReceptYnV} = validation; 
 
     //Hook(useEffect) : 컴포넌트 랜더링마다 실행
     useEffect(() => {
@@ -65,7 +64,7 @@ function Profile(){
 
     const setInfo = (data) => {
         setMember({
-            memKey:'MK210004',
+            memKey:data.memKey,
             memClassCd:data.memClassCd,
             memId:data.memId,
             memPw:data.memPw,
@@ -79,8 +78,6 @@ function Profile(){
             memMailReceptYn:data.memMailReceptYn,
             memArea:data.memArea,
             memGrade:data.memGrade,
-            regDt:data.regDt,
-            modDt:data.modDt,
             deleteYn:data.deleteYn
         });
     }
@@ -106,6 +103,7 @@ function Profile(){
             [type+'V']: validVal // type 키를 가진 값을 value 로 설정
         });
     };
+
     
       // 팝업창 열기
     const openPostCode = () => {
@@ -222,7 +220,9 @@ function Profile(){
     //axios get member
     const fetchMember = async() =>{
         try{
-            const response = await axios.get('http://localhost:8888/member/getMember/MK210004');
+            let username = Auth.getLoggedInUserName();
+
+            const response = await axios.get('/member/getMember/'+username);
             if(response.data.code >=0){
                 setInfo(response.data.data);
             }else{
@@ -241,7 +241,7 @@ function Profile(){
         
         try{
             
-            const response = await axios.get('http://localhost:8888/member/updateMember',{params: {...member}});
+            const response = await axios.get('/member/updateMember',{params: {...member}});
             if(response.data.code >=0){
                 alert("변경되었습니다.");
                 fetchMember();
@@ -299,7 +299,7 @@ function Profile(){
                                     회원님은 <strong>[<span className="xans-member-var-group_name">
                                     {
                                         (()=>{
-                                            if(memClassCd === 'STAFF' || '')
+                                            if(memGrade === 'STAFF' || '')
                                             return <>일반</>;
                                         })()
                                     }
@@ -333,7 +333,7 @@ function Profile(){
                                             {/* 비밀번호 변경 버튼 */}
                                             {
                                                 !isUpdate &&
-                                                <div className="btnArea M b_right">
+                                                <div className="btnArea L b_right" style={{float:"right"}}>
                                                     <Link to="/checkPassword?updatePassword">
                                                         <span className="black">비밀번호 변경</span>
                                                     </Link>
@@ -430,9 +430,9 @@ function Profile(){
                                         <th scope="row">이메일 수신여부 <img src={red_dot} alt="필수"/>
                                         </th>
                                         <td>
-                                            <input id="emailY" name="emailY" value="T" type="radio" onChange={onChange} checked={memMailReceptYn} />
+                                            <input id="memMailReceptYn" name="memMailReceptYn" value="Y" type="radio" onChange={onChange} checked={'Y'===memMailReceptYn} />
                                             <label>수신함</label>
-                                            <input id="emailN" name="emailN" value="F" type="radio" onChange={onChange} checked={!memMailReceptYn} />
+                                            <input id="memMailReceptYn" name="memMailReceptYn" value="N" type="radio" onChange={onChange} checked={'N'===memMailReceptYn} />
                                             <label>수신안함</label>
                                             <p>쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</p>
                                         </td>
