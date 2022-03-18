@@ -1,15 +1,21 @@
 package kr.co.hangagu.biz.member.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import kr.co.hangagu.biz.member.member.service.MemberService;
-import kr.co.hangagu.biz.member.member.vo.Member;
+import kr.co.hangagu.biz.member.member.entity.Member;
+import kr.co.hangagu.biz.member.order.dto.OrderDto;
 import kr.co.hangagu.biz.member.order.service.OrderService;
+import kr.co.hangagu.common.dto.ResultDto;
 import kr.co.hangagu.common.response.Response;
 
 /**
@@ -133,7 +139,14 @@ public class MemberController {
      * @return
      */
     @GetMapping(value = "/l/{memKey}")
-	public Response myPage(@PathVariable String memKey) {
-    	return orderService.myPage(memKey);
+	public ResultDto myPage(@PathVariable String memKey
+							 , @RequestParam(value="page", required=false, defaultValue="1") int page
+	 						 , @RequestParam(value="size", required=false, defaultValue="10") int size) {
+    	OrderDto dto = new OrderDto();
+    	dto.setMemKey(memKey);
+    	
+    	Pageable pageable = PageRequest.of(page-1, size);
+    	
+    	return orderService.findByMemKey(dto, pageable);
 	}
 }

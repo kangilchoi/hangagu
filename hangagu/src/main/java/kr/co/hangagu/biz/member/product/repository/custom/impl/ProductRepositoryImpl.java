@@ -155,6 +155,7 @@ public class ProductRepositoryImpl extends QuerydslRepositorySupport implements 
                                 prd.pmSize.as("pmSize"),
                                 prd.pmPrice.as("pmPrice"),
                                 prd.pmRemark.as("pmRemark"),
+                                prd.pmImgSrc.as("pmImgSrc"),
                                 prd.regDt.as("regDt"),
                                 prd.regEmpKey.as("regEmpKey"),
                                 prd.modDt.as("modDt"),

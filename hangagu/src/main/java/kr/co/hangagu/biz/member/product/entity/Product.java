@@ -45,6 +45,9 @@ public class Product {
 
     @Column(name = "PM_REMARK")
     private String pmRemark;
+    
+    @Column(name = "PM_IMG_SRC")
+    private String pmImgSrc;
 
     @Column(name = "REG_DT")
     private String regDt;
@@ -165,7 +168,15 @@ public class Product {
         this.pmRemark = pmRemark;
     }
 
-    public String getRegDt() {
+    public String getPmImgSrc() {
+		return pmImgSrc;
+	}
+
+	public void setPmImgSrc(String pmImgSrc) {
+		this.pmImgSrc = pmImgSrc;
+	}
+
+	public String getRegDt() {
         return regDt;
     }
 

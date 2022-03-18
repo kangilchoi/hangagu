@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.hangagu.biz.member.member.service.MemberService;
-import kr.co.hangagu.biz.member.member.vo.Member;
 
 @Controller
 @RequestMapping(value = "/")
