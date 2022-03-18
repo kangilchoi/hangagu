@@ -1,0 +1,240 @@
+select {
+    text-align: left !important;
+}
+
+a {
+    cursor: pointer;
+}
+
+a.btnUpdate label {
+    background-color: #fff;
+    border-radius: 3px;
+    color: #000;
+    cursor: pointer;
+}
+
+.react-datepicker-wrapper {
+    width: 75px !important;
+}
+
+.react-datepicker__navigation-icon {
+    top: 4px !important;
+}
+
+.react-datepicker__navigation-icon::before {
+    top: 11px !important;
+}
+
+.react-datepicker__navigation {
+    top: 11px !important;
+}
+
+.xans-myshop-orderhistorylistitem .title {
+	margin: 40px 0 10px 10px;
+}
+
+.xans-myshop-orderhistorylistitem .title h3 {
+    color: #353535;
+    font-size: 12px;
+}
+
+.xans-myshop-orderhistorylistitem table {
+    border-collapse: separate;
+    border: 1px solid #d7d5d5;
+    color: #353535;
+    line-height: 1.5;
+}
+
+.xans-myshop-orderhistorylistitem table {
+    border-collapse: separate;
+    border: 1px solid #d7d5d5;
+    color: #353535;
+    line-height: 1.5;
+}
+
+.xans-myshop-orderhistorylistitem table {
+    border-collapse: separate;
+    border: 1px solid #d7d5d5;
+    color: #353535;
+    line-height: 1.5;
+}
+
+.xans-myshop-orderhistorylistitem table .number {
+    width: 135px;
+}
+
+.xans-myshop-orderhistorylistitem table th {
+    padding: 11px 0 9px;
+    border-left: 1px solid #e9e9e9;
+    font-weight: normal;
+    vertical-align: middle;
+    background: #fbfafa;
+}
+
+.xans-myshop-orderhistorylistitem table .empty {
+    padding: 50px 0;
+    text-align: center;
+    font-weight: bold;
+    color: #757575;
+}
+
+.xans-myshop-orderhistorylistitem table th {
+    text-align: center;
+}
+
+.xans-myshop-orderhistorylistitem table td {
+    padding: 8px 0 5px;
+    border-top: 1px solid #e9e9e9;
+    text-align: center;
+    vertical-align: middle;
+}
+
+@media all and (max-width:479px){
+	#history_start_date, #history_end_date{
+		width: 75px;
+	}
+}
+
+@media all and (max-width:479px){
+	.ec-base-box{
+		padding: 20px, 0, 20px, 0;
+	}
+}
+
+.order_history_width{
+	width : 50%;
+}
+
+.order_history_menu_ul{
+	border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+a.btnNormal.selected img {
+    filter: contrast(0.8);
+}
+
+.ec-base-paginate {
+    margin: 25px 0 !important;
+    text-align: center;
+    font-size: 0;
+    line-height: 0;
+}
+
+.ec-base-paginate img {
+    vertical-align: top;
+}
+
+.ec-base-paginate ol {
+    display: inline-block;
+    font-size: 0;
+    line-height: 0;
+    vertical-align: top;
+    *display: inline;
+    *zoom: 1;
+    *margin: 0;
+    padding: 0;
+}
+
+.ec-base-paginate li:first-child {
+    margin-left: 0;
+}
+.ec-base-paginate li {
+    display: inline-block;
+    margin: 0 0 0 -1px !important;
+    border: 1px solid #ddd !important;
+    font-size: 11px;
+    color: #666 !important;
+    vertical-align: top;
+    *display: inline;
+    *zoom: 1;
+}
+
+.ec-base-paginate li a.this {
+    padding-bottom: 6px;
+    border-bottom: 3px solid #000;
+    color: #000;
+}
+.ec-base-paginate li a {
+    display: block;
+    width: 33px;
+    padding: 9px 0;
+    font-weight: bold;
+    color: #000;
+    line-height: 14px;
+    background: #fff;
+    font-family: 'Noto Sans',sans-serif;
+    font-size: 13px;
+    margin: 0;
+    height: 32px;
+}
+
+
+li.active a {
+    color: #fff;
+    background-color: #d9d9d9;
+}
+
+.stateSelect {
+    float: left;
+}
+.period {
+    float: left;
+    margin: 0 5px;
+}
+.react-datepicker-wrapper {
+    float: left;
+}
+.fText {
+    border: 1px solid #ddd;
+    width: 72px;
+    padding: 0 4px;
+    cursor: pointer;
+}
+.ui-datepicker-trigger {
+    float: left;
+    margin: 0 6px 0 0;
+    background-color: #fff;
+}
+.ui-datepicker-trigger img {
+    vertical-align: middle;
+}
+.datebetween {
+    float: left;
+}
+#order_search_btn {
+    margin-left: 5px;
+}
+.ec-base-tab .menu li {
+    float: left;
+    background: #fff;
+    font-size: 12px;
+    width: 50%;
+    height: 37px;
+}
+.ec-base-tab .menu li:hover a {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+.ec-base-tab .menu li.selected a {
+    position: relative;
+    top: 0 !important;
+    border: 1px solid #000;
+    border-bottom: none !important;
+    color: #000;
+    background: #fff;
+    height: 38px;
+}
+.ec-base-tab .menu li a {
+    display: block;
+    min-width: 187px;
+    margin: 0;
+    padding: 10px 0;
+    color: #999;
+    text-decoration: none;
+    text-align: center;
+    background: #fff;
+    transition: all 0.3s ease-in-out;
+    height: 37px;
+    line-height: 11px;
+}

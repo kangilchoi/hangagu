@@ -1,0 +1,276 @@
+.xans-member-joincomplete {
+    margin: 0 auto;
+    padding: 30px 0;
+    text-align: center;
+}
+
+
+@media screen and (max-width:1280px) {
+    .xans-member-joincomplete .joinComplete .desc {
+        margin: 0 0 10px;
+        font-size: 34px;
+        color: #000;
+        font-style: italic;
+    }
+
+    .xans-member-joincomplete .joinComplete .information {
+        width: 430px;
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 10px 20px;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .xans-member-joincomplete .joinComplete .desc {
+        margin: 0 0 10px;
+        font-size: 16px;
+        color: #000;
+        font-style: italic;
+    }
+
+    .xans-member-joincomplete .joinComplete .information {
+        width: 360px;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        padding: 10px 20px;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+    }
+}
+
+.xans-member-joincomplete .joinComplete .information .description li {
+    padding: 10px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.xans-member-joincomplete .joinComplete .information .description li .ci {
+    padding-left: 5px;
+    font-weight: bold;
+    color: #000;
+}
+
+.xans-member-joincomplete .joinComplete .memberSpecial {
+    margin: 20px 0;
+    color: #000;
+}
+
+.xans-member-joincomplete .joinComplete .memberSpecial p:first-child {
+    margin: 0;
+}
+
+.xans-member-joincomplete .joinComplete .memberSpecial p {
+    margin: 5px 0 0;
+}
+
+.ec-base-button {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.ec-base-button:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.b_center {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.L {
+    width: 140px;
+    font-size: 13px;
+    margin: 2px;
+}
+
+.btnArea .black {
+    border: 1px solid #000;
+    background: #000;
+    color: #fff;
+    padding: 8px 0;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.btnArea .gray {
+    border: 1px solid #ddd;
+    background: #eee;
+    color: #222;
+    padding: 8px 0;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.boardList {
+    margin: 0 0 1px;
+    border: 1px solid #d7d5d5;
+    border-top: 0;
+    color: #353535;
+    line-height: 1.5;
+}
+
+.boardList table {
+    border-top: 1px solid #d7d5d5;
+}
+
+table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+.boardList .chk {
+    width: 27px;
+}
+
+ .boardList th {
+    padding: 11px 0 9px;
+    border-right: 1px solid #e9e9e9;
+    font-weight: normal;
+    background: #fbfafa;
+    text-align: center;
+}
+
+th, td {
+    border: 0;
+    vertical-align: top;
+}
+
+.boardList .thumb {
+    width: 92px;
+}
+
+.boardList .product {
+    width: auto;
+}
+
+.boardList .price {
+    width: 95px;
+}
+
+.boardList .quantity {
+    width: 40px;
+}
+
+.boardList .mileage {
+    width: 85px;
+}
+
+.boardList .delivery {
+    width: 90px;
+}
+
+.boardList .charge {
+    width: 70px;
+}
+
+.boardList th.total {
+    border-right: 0;
+}
+
+.boardList .total {
+    width: 90px;
+}
+
+.boardList tfoot td {
+    padding: 15px 10px 17px;
+    background: #fbfafa;
+    text-align: right;
+}
+
+.boardList td {
+    padding: 8px 0 5px;
+    border-top: 1px solid #e9e9e9;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.boardList tfoot td .type {
+    float: left;
+    margin: 6px 0 0;
+    font-weight: normal;
+}
+
+.boardList tfoot td .total {
+    margin: 0 0 0 15px;
+    color: #008bcc;
+}
+
+.boardList tfoot td .total span {
+    font-size: 17px;
+    letter-spacing: -1px;
+}
+
+.boardList .thumb {
+    width: 92px;
+}
+
+.boardList td.thumb img {
+    width: 80px;
+}
+
+.boardList td.product {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.boardList .product {
+    width: auto;
+}
+
+.boardList td.product a {
+    color: #353535;
+}
+
+.boardList td.product div.option,  .boardList td.product ul.option > li {
+    margin: 9px 0 0;
+    color: #757575;
+    line-height: 16px;
+}
+
+.boardList td.product .free,  .boardList td.product .period {
+    margin: 5px 0 0;
+}
+
+.boardList td .discount {
+    text-decoration: line-through;
+}
+
+.txtDel, .strike, .discount {
+    text-decoration: line-through;
+}
+
+.boardList td .discount strong {
+    font-weight: normal;
+}
+
+.boardList td.mileage,  .boardList td.delivery {
+    color: #757575;
+}
+
+.boardList td.mileage img {
+    vertical-align: middle;
+}
+
+.boardList .charge {
+    width: 70px;
+}
+
+.boardList .total {
+    width: 90px;
+}
