@@ -386,3 +386,22 @@ li.active a {
 a {
     text-decoration: none !important;
 }
+
+[class^='btnNormal'], a[class^='btnNormal'] {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 3px 8px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: normal;
+    text-decoration: none;
+    vertical-align: middle;
+    word-spacing: -0.5px;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: nowrap;
+    color: #333333;
+    background-color: #fff;
+}

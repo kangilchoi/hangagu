@@ -16,6 +16,9 @@ import ListCartComponent from 'component/cart/ListCartComponent';
 
 import ListWishComponent from 'component/wishList/ListWishComponent';
 
+import ListAddrComponent from 'component/addr/ListAddrComponent';
+import AddAddrComponent from 'component/addr/AddAddrComponent';
+
 import Login from "component/login/Login";
 import MyPage from "component/myPage/MyPage";
 import Profile from "component/myPage/Profile";
@@ -63,6 +66,8 @@ function App() {
               <Route path = "/order/orderResult" component = {CompleteOrderComponent}></Route>
               <Route path = "/cart/get" component = {ListCartComponent}></Route>
               <Route path = "/interestProduct/get" component = {ListWishComponent}></Route>
+              <Route path = "/addr/get" component = {ListAddrComponent}></Route>
+              <Route path = "/addr/addView" component = {AddAddrComponent}></Route>
             </Switch>
           </div>
         <Footer/>
