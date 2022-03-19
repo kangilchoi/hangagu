@@ -1,12 +1,12 @@
 package kr.co.hangagu.biz.member.board.repository.custom;
 
 import kr.co.hangagu.biz.member.board.dto.BoardDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface BoardRepositoryCustom {
 
-    public List<BoardDto> selectBoardList(BoardDto dto);
+    public Page<BoardDto> selectBoardList(BoardDto dto, Pageable pageable);
 
     public BoardDto selectBoardDetail(BoardDto dto);
 }

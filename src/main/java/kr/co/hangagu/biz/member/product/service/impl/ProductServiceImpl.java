@@ -5,6 +5,7 @@ import kr.co.hangagu.biz.member.product.dto.ProductDto;
 import kr.co.hangagu.biz.member.product.entity.Product;
 import kr.co.hangagu.biz.member.product.repository.ProductRepository;
 import kr.co.hangagu.biz.member.product.service.ProductService;
+import kr.co.hangagu.common.constants.HangaguConstant;
 import kr.co.hangagu.common.dto.ResultDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResultDto findByPmKey(ProductDto dto) {
+    public ResultDto findDetail(ProductDto dto) {
         ResultDto resultDto = new ResultDto();
 
         ProductDto productDto = productRepository.selectProductDetail(dto);
@@ -55,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 
         // 리팩토링(적정팩토리메소드)
         Product prd = new Product();
-        prd.setPmKey(functionRepository.makeKeyFunction("PK"));
+        prd.setPmKey(functionRepository.makeKeyFunction(HangaguConstant.Seq.PRODUCT_KEY.getValue()));
         prd.setPmClassCd(dto.getPmClassCd());
         prd.setPmDetailClassCd(dto.getPmDetailClassCd());
         prd.setPmLineCd(dto.getPmLineCd());
@@ -74,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
         Product newProduct = productRepository.save(prd);
 
         if(newProduct == null) {
-            resultDto.setData("9999");
+            resultDto.setCode("9999");
             resultDto.setMessage("등록 실패");
         } else {
             resultDto.setData(newProduct);
@@ -97,7 +98,7 @@ public class ProductServiceImpl implements ProductService {
 
         Product newProduct = productRepository.save(product);
         if(newProduct == null) {
-            resultDto.setData("9999");
+            resultDto.setCode("9999");
             resultDto.setMessage("수정 실패");
         } else {
             resultDto.setData(newProduct);

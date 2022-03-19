@@ -26,9 +26,9 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping(
-            value = {"list/{pmClassCd}/{pmDetailClassCd}/{pmLineCd}"
-                    , "list/{pmClassCd}/{pmDetailClassCd}"
-                    , "list/{pmClassCd}"}
+            value = {"/{pmClassCd}/{pmDetailClassCd}/{pmLineCd}/list"
+                    , "/{pmClassCd}/{pmDetailClassCd}/list"
+                    , "/{pmClassCd}/list"}
             , method = RequestMethod.GET
     )
     public @ResponseBody
@@ -56,7 +56,7 @@ public class ProductController {
         dto.setPmDetailClassCd(pmDetailClassCd);
         dto.setPmLineCd(pmDetailClassCd);
         dto.setPmKey(pmKey);
-        ResultDto resultDto = productService.findByPmKey(dto);
+        ResultDto resultDto = productService.findDetail(dto);
         return resultDto;
     }
 
