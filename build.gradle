@@ -42,6 +42,10 @@ dependencies {
 
 	//email sender
 	implementation 'com.sun.mail:javax.mail:1.6.2'
+
+	//ftp
+	implementation 'org.springframework.integration:spring-integration-sftp:5.1.8.RELEASE'
+	implementation 'org.springframework.integration:spring-integration-ftp:5.1.8.RELEASE'
 }
 
 // 리액트 설정
