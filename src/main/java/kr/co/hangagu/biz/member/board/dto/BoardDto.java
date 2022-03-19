@@ -6,11 +6,15 @@ public class BoardDto {
 
     String memKey;
 
+    String memNm;
+
     String bdNm;
 
     String bdContents;
 
     String bdClassCd;
+
+    String bdClassCdDesc;
 
     String bdPw;
 
@@ -38,6 +42,14 @@ public class BoardDto {
         this.memKey = memKey;
     }
 
+    public String getMemNm() {
+        return memNm;
+    }
+
+    public void setMemNm(String memNm) {
+        this.memNm = memNm;
+    }
+
     public String getBdNm() {
         return bdNm;
     }
@@ -60,6 +72,14 @@ public class BoardDto {
 
     public void setBdClassCd(String bdClassCd) {
         this.bdClassCd = bdClassCd;
+    }
+
+    public String getBdClassCdDesc() {
+        return bdClassCdDesc;
+    }
+
+    public void setBdClassCdDesc(String bdClassCdDesc) {
+        this.bdClassCdDesc = bdClassCdDesc;
     }
 
     public String getBdPw() {

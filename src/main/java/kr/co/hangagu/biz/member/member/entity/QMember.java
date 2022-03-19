@@ -45,11 +45,11 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath memPhone = createString("memPhone");
 
+    public final StringPath memPost = createString("memPost");
+
     public final StringPath memPw = createString("memPw");
 
     public final StringPath memTel = createString("memTel");
-    
-    public final StringPath memPost = createString("memPost");
 
     public final DateTimePath<java.time.LocalDateTime> modDt = createDateTime("modDt", java.time.LocalDateTime.class);
 

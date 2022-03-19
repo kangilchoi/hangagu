@@ -21,4 +21,12 @@ public class HangaguFunctionRepository {
 
         return result.get(0);
     }
+
+    public String passwordFunction(String password) {
+        Query nativeQuery = entityManager.createNativeQuery(HangaguConstant.Sql.PASSWORD.getValue(), String.class).setParameter(1, password);
+
+        List<String> result = nativeQuery.getResultList();
+
+        return result.get(0);
+    }
 }

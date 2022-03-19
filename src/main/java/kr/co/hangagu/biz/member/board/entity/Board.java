@@ -1,6 +1,9 @@
 package kr.co.hangagu.biz.member.board.entity;
 
+import kr.co.hangagu.biz.common.converter.StringToPasswordConverter;
+
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -23,6 +26,7 @@ public class Board {
     String bdClassCd;
 
     @Column(name = "DB_PW")
+    @Convert(converter= StringToPasswordConverter.class)
     String bdPw;
 
     @Column(name = "BD_OPEN_YN")

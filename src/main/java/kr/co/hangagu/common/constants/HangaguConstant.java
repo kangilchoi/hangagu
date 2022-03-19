@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -151,7 +152,8 @@ public class HangaguConstant {
     }
 
     public enum Sql {
-    	makeKey("SELECT .make_key(?)");
+    	makeKey("SELECT .make_key(?)"),
+		PASSWORD("SELECT PASSWORD(?)");
 
     	private String value;
 
@@ -161,6 +163,21 @@ public class HangaguConstant {
 
     	public String getValue() {
     		return this.value;
+		}
+	}
+
+	public enum Seq {
+    	PRODUCT_KEY("PM"),
+		BOARD_KEY("BK");
+
+    	private String value;
+
+    	private Seq(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return this.value;
 		}
 	}
 
