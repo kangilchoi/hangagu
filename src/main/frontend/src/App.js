@@ -15,6 +15,9 @@ import FindIdResult from "component/login/FindIdResult";
 import FindPassword from "component/login/FindPassword";
 import FindPasswordQuestion from "component/login/FindPasswordQuestion";
 import FindPasswordResult from "component/login/FindPasswordResult";
+import Qa from "component/community/Qa";
+import QaDetail from "component/community/QaDetail";
+import Qna from "component/community/write/Qna"
 import Header from 'component/Header';
 import Footer from 'component/Footer';
 
@@ -43,7 +46,9 @@ function App() {
         <Route exact path="/login/findPassword" component={FindPassword} />
         <Route exact path="login/FindPasswordQuestion" component={FindPasswordQuestion} />
         <Route exact path="/login/findPasswordResult" component={FindPasswordResult} />
-        <Route exact path="/login/join" component={Join} />
+        <Route exact path="/community/Qa" component={Qa} />
+        <Route exact path="/community/QaDetail/:bdKey" component={QaDetail} />
+        <Route exact path="/community/write/Qna" component={Qna} />
       </main>
       <Footer>
 		</Footer>

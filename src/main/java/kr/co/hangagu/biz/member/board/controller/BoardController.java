@@ -43,8 +43,9 @@ public class BoardController {
 
     @RequestMapping(value = "/detail/{bdKey}", method = RequestMethod.GET)
     public @ResponseBody
-    ResultDto getBoardDetail(@PathVariable("pmKey") String pmKey) {
+    ResultDto getBoardDetail(@PathVariable("bdKey") String bdKey) {
         BoardDto dto = new BoardDto();
+        dto.setBdKey(bdKey);
         ResultDto resultDto = boardService.findDetail(dto);
         return resultDto;
     }

@@ -9,4 +9,6 @@ public interface BoardRepositoryCustom {
     public Page<BoardDto> selectBoardList(BoardDto dto, Pageable pageable);
 
     public BoardDto selectBoardDetail(BoardDto dto);
+
+    public void updateBoardViewCnt(BoardDto dto);
 }

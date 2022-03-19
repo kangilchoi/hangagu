@@ -41,6 +41,8 @@ public class BoardServiceImpl implements BoardService {
 
         BoardDto boardDto = boardRepository.selectBoardDetail(dto);
 
+        boardRepository.updateBoardViewCnt(dto);
+
         resultDto.setData(boardDto);
 
         return resultDto;

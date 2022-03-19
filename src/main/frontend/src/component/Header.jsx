@@ -121,7 +121,9 @@ function Header() {
 							<a href="" style={{verticalAlign: "-4px"}}>COMMUNITY</a>
 							<div className="t_view dropDownMenu">
 								<ul className="">
-									<li><a href="#">Q&A</a></li>
+									<Link to="/community/Qa?page=1&size=10">
+										<li><a href="#">Q&A</a></li>
+									</Link>
 									<li><a href="#">REVIEW</a></li>
 									<li><a href="#">MEDIA</a></li>
 									<li><a href="#">CUSTOM MADE</a></li>
