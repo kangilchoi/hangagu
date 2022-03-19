@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import * as Auth from 'component/Auth';
+import * as Auth from 'components/Auth';
 import { Link } from 'react-router-dom'
 
 /*css*/
@@ -173,58 +173,72 @@ function MyPage(){
 						<ul className="order">
 							<li>
 								<strong>입금전</strong>
-								<a href="/myshop/order/list.html?order_status=shipped_before" className="count">
+                                <Link to="/order/get" className="count">
+								{/* <a href="/myshop/order/list.html?order_status=shipped_before" className="count"> */}
 									<span id="xans_myshop_orderstate_shppied_before_count">
 									{delBeforeDeposit}
 									</span>
-								</a>
+								{/* </a> */}
+                                </Link>
 							</li>
 							<li>
 								<strong>배송준비중</strong>
-								<a href="/myshop/order/list.html?order_status=shipped_standby" className="count">
+                                <Link to="/order/get" className="count">
+								{/* <a href="/myshop/order/list.html?order_status=shipped_standby" className="count"> */}
 									<span id="xans_myshop_orderstate_shppied_standby_count">
 									{delReady}
 									</span>
-								</a>
+								{/* </a> */}
+                                </Link>
 							</li>
 							<li>
 								<strong>배송중</strong>
-								<a href="/myshop/order/list.html?order_status=shipped_begin" className="count">
+                                <Link to="/order/get" className="count">
+								{/* <a href="/myshop/order/list.html?order_status=shipped_begin" className="count"> */}
 									<span id="xans_myshop_orderstate_shppied_begin_count">
 									{delInDelivery}
 									</span>
-								</a>
+								{/* </a> */}
+                                </Link>
 							</li>
 							<li>
 								<strong>배송완료</strong>
-								<a href="/myshop/order/list.html?order_status=shipped_complate" className="count">
+                                <Link to="/order/get" className="count">
+								{/* <a href="/myshop/order/list.html?order_status=shipped_complate" className="count"> */}
 									<span id="xans_myshop_orderstate_shppied_complate_count">
 									{delComplete}
 									</span>
-								</a>
+								{/* </a> */}
+                                </Link>
 							</li>
 						</ul>
 						<ul className="cs">
 							<li>
 								<span className="icoDot"></span>
 								<strong>취소 : </strong>
-								<a href="/myshop/order/list.html?order_status=order_cancel" className="count">
+                                <Link to="/order/getrm" className="count">
+								{/* <a href="/myshop/order/list.html?order_status=order_cancel" className="count"> */}
 									<span id="xans_myshop_orderstate_order_cancel_count">{delCancel}</span>
-								</a>
+								{/* </a> */}
+                                </Link>
 							</li>
 							<li>
 								<span className="icoDot"></span>
 								<strong>교환 : </strong>
-								<a href="/myshop/order/list.html?order_status=order_exchange" className="count">
+                                <Link to="/order/getrm" className="count">
+								{/* <a href="/myshop/order/list.html?order_status=order_exchange" className="count"> */}
 									<span id="xans_myshop_orderstate_order_exchange_count">{delExchange}</span>
-								</a>
+								{/* </a> */}
+                                </Link>
 							</li>
 							<li>
 								<span className="icoDot"></span>
 								<strong>반품 : </strong>
-								<a href="/myshop/order/list.html?order_status=order_return" className="count">
+                                <Link to="/order/getrm" className="count">
+								{/* <a href="/myshop/order/list.html?order_status=order_return" className="count"> */}
 									<span id="xans_myshop_orderstate_order_return_count">{delReturn}</span>
-								</a>
+								{/* </a> */}
+                                </Link>
 							</li>
 						</ul>
 					</div>
@@ -234,13 +248,13 @@ function MyPage(){
 				<div id="myshopMain" className="xans-element- xans-myshop xans-myshop-main ">
 					<ul>
 						<li>
-							<a href="/myshop/order/list.html">
+							<Link to="/order/get">
 								<h3>
 									<strong>Order</strong>주문내역 조회
 								</h3>
 								<p>고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다. 비회원의 경우, 주문서의 주문번호와
 									비밀번호로 주문조회가 가능합니다.</p>
-							</a>
+                            </Link>
 						</li>
 						<li>
 							<a href="/member/modify.html">
@@ -252,12 +266,12 @@ function MyPage(){
 							</a>
 						</li>
 						<li>
-							<a href="/myshop/wish_list.html">
+							<Link to="/interestProduct/get">
 								<h3>
 									<strong>Wishlist</strong>관심 상품
 								</h3>
 								<p>관심상품으로 등록하신 상품의 목록을 보여드립니다.</p>
-							</a>
+                            </Link>
 						</li>
 						<li className="displaynone">
 							<a href="">
