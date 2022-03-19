@@ -168,7 +168,8 @@ public class HangaguConstant {
 
 	public enum Seq {
     	PRODUCT_KEY("PM"),
-		BOARD_KEY("BK");
+		BOARD_KEY("BK"),
+		FILE_KEY("FK");
 
     	private String value;
 
@@ -183,4 +184,7 @@ public class HangaguConstant {
 
     public static String HANGAGU_EMAIL = "hangaguroot";
     public static String HANGAGU_EMAIL_PW = "fbjcibkpggteapaq";
+
+	public static String FTP_TEMP = "/home/hangagu/temp";
+    public static String FTP_PATH = "/home/hangagu/file";
 }
