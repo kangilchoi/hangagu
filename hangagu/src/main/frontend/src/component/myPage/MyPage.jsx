@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import * as Auth from 'components/Auth';
+import * as Auth from 'component/Auth';
 import { Link } from 'react-router-dom'
 
 /*css*/
