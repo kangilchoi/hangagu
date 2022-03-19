@@ -22,15 +22,18 @@ public class Board {
     @Column(name = "BD_CONTENTS")
     String bdContents;
 
-    @Column(name = "DB_CLASS_CD")
+    @Column(name = "BD_CLASS_CD")
     String bdClassCd;
 
-    @Column(name = "DB_PW")
+    @Column(name = "BD_PW")
     @Convert(converter= StringToPasswordConverter.class)
     String bdPw;
 
     @Column(name = "BD_OPEN_YN")
     String bdOpenYN;
+
+    @Column(name = "BD_VIEW_CNT")
+    int bdViewCnt;
 
     @Column(name = "REG_DT")
     String regDt;
@@ -95,6 +98,14 @@ public class Board {
 
     public void setBdOpenYN(String bdOpenYN) {
         this.bdOpenYN = bdOpenYN;
+    }
+
+    public int getBdViewCnt() {
+        return bdViewCnt;
+    }
+
+    public void setBdViewCnt(int bdViewCnt) {
+        this.bdViewCnt = bdViewCnt;
     }
 
     public String getRegDt() {

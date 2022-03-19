@@ -80,6 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             //.antMatchers("/member/**").permitAll()
     		//.antMatchers("/board/**").permitAll()
     		.antMatchers("/product/**").permitAll()
+			.antMatchers("/board/**").permitAll()
     		.antMatchers("/component/**").permitAll()
         	.antMatchers("/authenticate").permitAll()
         	// 다른 모든 요청은 인증을 한다.

@@ -20,6 +20,8 @@ public class BoardDto {
 
     String bdOpenYN;
 
+    int bdViewCnt;
+
     String regDt;
 
     String modDt;
@@ -96,6 +98,14 @@ public class BoardDto {
 
     public void setBdOpenYN(String bdOpenYN) {
         this.bdOpenYN = bdOpenYN;
+    }
+
+    public int getBdViewCnt() {
+        return bdViewCnt;
+    }
+
+    public void setBdViewCnt(int bdViewCnt) {
+        this.bdViewCnt = bdViewCnt;
     }
 
     public String getRegDt() {

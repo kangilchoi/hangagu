@@ -46,6 +46,7 @@ public class BoardRepositoryImpl extends QuerydslRepositorySupport implements Bo
                                     code.cdDesc.as("bdClassCdDesc"),
                                     brd.bdPw.as("bdPw"),
                                     brd.bdOpenYN.as("bdOpenYN"),
+                                    brd.bdViewCnt.as("bdViewCnt"),
                                     brd.regDt.as("regDt"),
                                     brd.modDt.as("modDt"),
                                     brd.deleteYN.as("deleteYN")
@@ -97,6 +98,34 @@ public class BoardRepositoryImpl extends QuerydslRepositorySupport implements Bo
                 .fetchOne();
 
         return result;
+    }
+    @Override
+    public void updateBoardViewCnt(BoardDto dto) {
+        QBoard brd = QBoard.board;
+
+        BoardDto result = queryFactory
+                .select(
+                        Projections.bean(BoardDto.class,
+                                brd.bdKey.as("bdKey"),
+                                brd.memKey.as("memKey"),
+                                brd.bdContents.as("bdContents"),
+                                brd.bdClassCd.as("bdClassCd"),
+                                brd.bdPw.as("bdPw"),
+                                brd.bdOpenYN.as("bdOpenYN"),
+                                brd.regDt.as("regDt"),
+                                brd.modDt.as("modDt"),
+                                brd.deleteYN.as("deleteYN")
+                        )
+                )
+                .from(brd)
+                .where(brd.bdKey.eq(dto.getBdKey()))
+                .fetchOne();
+
+        queryFactory
+                .update(brd)
+                .set(brd.bdViewCnt, result.getBdViewCnt() + 1)
+                .where(brd.bdKey.eq(dto.getBdKey()))
+                .execute();
     }
 
 }
