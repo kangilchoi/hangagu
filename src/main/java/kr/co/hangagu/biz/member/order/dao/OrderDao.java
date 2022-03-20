@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import kr.co.hangagu.biz.member.order.entity.OrderEntity;
-import kr.co.hangagu.common.constants.HangaguConstant;
+import kr.co.hangagu.biz.member.order.entity.OrderSearchEntity;
 
 public interface OrderDao extends JpaRepository<OrderEntity, Integer> {
 	@Query(nativeQuery = true, value="SELECT A.OD_PM_KEY, A.PM_KEY, A.PM_QUANTITY, "
@@ -19,8 +19,12 @@ public interface OrderDao extends JpaRepository<OrderEntity, Integer> {
 			+ "ON A.OD_KEY = B.OD_KEY "
 			+ "JOIN PRODUCT_TB C "
 			+ "ON C.PM_KEY = A.PM_KEY "
-			+ "WHERE B.MEM_KEY=:memKey AND A.DELETE_YN=:deleteYn AND B.OD_STATUS NOT IN (:odStatus) ORDER BY B.REG_DT DESC")
-	List<Map<String, Object>> findAllOfOrder(@Param("memKey") String memKey, @Param("deleteYn") String deleteYn, @Param("odStatus") HangaguConstant.Oder odStatus);
+			+ "WHERE B.MEM_KEY=:memKey "
+			+ "AND A.DELETE_YN=:#{#orderSearchEntity.deleteYn} "
+			//+ "AND B.OD_STATUS=:#{#orderSearchEntity.odStatus} "
+			+ "AND B.REG_DT BETWEEN :#{#orderSearchEntity.fromDt} AND :#{#orderSearchEntity.toDt} "
+			+ "ORDER BY B.REG_DT DESC")
+	List<Map<String, Object>> findAllOfOrder(@Param("memKey") String memKey, @Param("orderSearchEntity") OrderSearchEntity orderSearchEntity);
 	
 	@Query(nativeQuery = true, value="SELECT sylim_test.make_key(:keyType)")
 	String makeKey(@Param("keyType") String keyType);

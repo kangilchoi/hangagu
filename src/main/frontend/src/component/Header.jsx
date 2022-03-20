@@ -19,6 +19,7 @@ import g_btn_menu_plus from "img/g_btn_menu_plus.png"
 import member_icon_b from "img/member_icon_b.png"
 import cart_icon_b from "img/cart_icon_b.png"
 import find_icon_b from "img/find_icon_b.png"
+import wish_icon_b from "img/wish_icon_b.png"
 
 /*javascript(view 관련 소스, ex : slider, menu drop down...)*/
 // import "js/main/common.js"
@@ -37,9 +38,9 @@ function Header() {
 	//Hook(useEffect) : 컴포넌트 랜더링마다 실행
     useEffect(() => {
 		login();
-		history.push({
-			pathname: "/main"
-		});
+		// history.push({
+		// 	pathname: "/main"
+		// });
     },[]);
 
 	const login = () =>{
@@ -121,9 +122,7 @@ function Header() {
 							<a href="" style={{verticalAlign: "-4px"}}>COMMUNITY</a>
 							<div className="t_view dropDownMenu">
 								<ul className="">
-									<Link to="/community/Qa?page=1&size=10">
-										<li><a href="#">Q&A</a></li>
-									</Link>
+									<li><a href="#">Q&A</a></li>
 									<li><a href="#">REVIEW</a></li>
 									<li><a href="#">MEDIA</a></li>
 									<li><a href="#">CUSTOM MADE</a></li>
@@ -213,15 +212,19 @@ function Header() {
 										<div className="t_view dropDownMenu">
 											<div className="sub_sec">
 												<ul>
-													<li>
-														<a id="addcart" href="#">
-															장바구니
-															<span className="count displaynone"></span>
-														</a>
-													</li>
+                                                    <Link to="/cart/get">
+                                                        <li>
+                                                            <a id="addcart" href="#">
+                                                                장바구니
+                                                                <span className="count displaynone"></span>
+                                                            </a>
+                                                        </li>
+                                                    </Link>
+                                                    <Link to="/order/get">
 													<li>
 														<a href="#">주문조회</a>
 													</li>
+                                                    </Link>
 												</ul>
 											</div>
 										</div>
@@ -251,6 +254,26 @@ function Header() {
 				</div>
 			</div>
 			<div className="full_menu"></div>
+
+            <div class="right_bt_page">
+                <div class="right_search_bt">
+                    {/* <!-- 장바구니 --> */}
+                    <button class="search_pop_bt" alt="Search bt">
+                        <Link to="/cart/get">
+                            <img src={cart_icon_b} alt="Search"></img>
+                        </Link>
+                        <div class="text">장바구니</div>
+                    </button>
+                </div>
+
+                {/* <!--관심 상품-->   */}
+                <div class="right_kakao_bt">
+                    <Link to="/interestProduct/get">
+                        <img src={wish_icon_b} alt="Search"></img>
+                    </Link>
+                    <div class="text">관심상품</div>
+                </div>
+            </div>
 		</div>
 	</div>
   );

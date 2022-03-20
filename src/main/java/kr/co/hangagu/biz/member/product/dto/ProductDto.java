@@ -29,6 +29,8 @@ public class ProductDto {
     private String pmPrice;
 
     private String pmRemark;
+    
+    private String pmImgSrc;
 
     private String regDt;
 
@@ -152,7 +154,15 @@ public class ProductDto {
         this.pmRemark = pmRemark;
     }
 
-    public String getRegDt() {
+    public String getPmImgSrc() {
+		return pmImgSrc;
+	}
+
+	public void setPmImgSrc(String pmImgSrc) {
+		this.pmImgSrc = pmImgSrc;
+	}
+
+	public String getRegDt() {
         return regDt;
     }
 

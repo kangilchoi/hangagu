@@ -3,7 +3,8 @@ package kr.co.hangagu.common.constants;
 public enum PrimaryKeyType {
 	ORDER("OD")
 	, ORDER_PRODUCT("OP")
-	, INTEREST_PM_KEY("IP");
+	, INTEREST_PM_KEY("IP")
+	, ADDR("AD");
 	
 	private String value;
 	

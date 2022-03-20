@@ -15,7 +15,8 @@ public class HangaguFunctionRepository {
     private EntityManager entityManager;
 
     public String makeKeyFunction(String keyType) {
-        Query nativeQuery = entityManager.createNativeQuery(HangaguConstant.Sql.makeKey.getValue(), String.class).setParameter(1, keyType);
+    	String sql = "SELECT make_key(?)";
+        Query nativeQuery = entityManager.createNativeQuery(sql).setParameter(1, keyType);
 
         List<String> result = nativeQuery.getResultList();
 

@@ -2,24 +2,24 @@ package kr.co.hangagu.biz.member.cart.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import kr.co.hangagu.common.constants.HangaguConstant;
 import kr.co.hangagu.common.util.DateUtils;
 import kr.co.hangagu.common.util.StringUtils;
 
 @Entity
 @Table(name = "CART_TB")
+//@Inheritance(strategy = InheritanceType.JOINED)
 @DynamicInsert 
-@DynamicUpdate
+//@DynamicUpdate
 public class CartEntity extends DateUtils {
 	
 	@Id
@@ -27,35 +27,36 @@ public class CartEntity extends DateUtils {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int cartKey;
 	
-	@Column(name="PM_KEY", nullable=false)
+	@Column(name="PM_KEY", nullable=true)
 	private String pmKey;
 	
-	@Column(name="PM_QUANTITY", nullable=false)
+	@Column(name="PM_QUANTITY", nullable=true)
 	private int pmQuantity;
+	
+	@Column(name="PM_SELECTED_COLOR", nullable=true)
+	private String pmSelectedColor;
 	
 	@Column(name="MEM_KEY", nullable=false)
 	private String memKey;
 	
-	@Column(name="CART_STATUS")
-	@Enumerated(value=EnumType.STRING)
-	private HangaguConstant.Cart cartStatus;
+	/*
+	 * @Column(name="CART_STATUS", nullable=true)
+	 * 
+	 * @Enumerated(value=EnumType.STRING) private HangaguConstant.Cart cartStatus;
+	 */
+	
+	@Column(name="CART_STATUS", nullable=true)
+	private String cartStatus;
 	
 	@Column(name="DELETE_YN", nullable=true)
 	private String deleteYn;
 	
-	public CartEntity() {
-		
-	}
+	/*
+	 * @Column(name="REG_DT") private String regDt;
+	 * 
+	 * @Column(name="MOD_DT") private String modDt;
+	 */
 	
-	public CartEntity(int cartKey, String pmKey, int pmQuantity, String memKey, HangaguConstant.Cart cartStatus, String deleteYn) {
-		super();
-		this.cartKey = cartKey;
-		this.pmKey = pmKey;
-		this.pmQuantity = pmQuantity;
-		this.memKey = memKey;
-		this.cartStatus = cartStatus;
-		this.deleteYn = deleteYn;
-	}
 
 	public int getCartKey() {
 		return cartKey;
@@ -87,6 +88,14 @@ public class CartEntity extends DateUtils {
 		}
 	}
 
+	public String getPmSelectedColor() {
+		return pmSelectedColor;
+	}
+
+	public void setPmSelectedColor(String pmSelectedColor) {
+		this.pmSelectedColor = pmSelectedColor;
+	}
+
 	public String getMemKey() {
 		return memKey;
 	}
@@ -97,14 +106,16 @@ public class CartEntity extends DateUtils {
 		}
 	}
 
-	public HangaguConstant.Cart getCartStatus() {
+	public String getCartStatus() {
 		return cartStatus;
 	}
 
-	public void setCartStatus(HangaguConstant.Cart cartStatus) {
-		if(!"".equals(StringUtils.getDefaultValue(cartStatus, ""))) {
-			this.cartStatus = cartStatus;
-		}
+	public void setCartStatus(String cartStatus) {
+		/*
+		 * if(!"".equals(StringUtils.getDefaultValue(cartStatus, ""))) { this.cartStatus
+		 * = cartStatus; }
+		 */
+		this.cartStatus = cartStatus;
 	}
 
 	public String getDeleteYn() {
@@ -116,6 +127,5 @@ public class CartEntity extends DateUtils {
 			this.deleteYn = deleteYn;
 		}
 	}
-	
 	
 }

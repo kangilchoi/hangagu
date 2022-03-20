@@ -12,4 +12,6 @@ public interface ProductRepositoryCustom {
     public ProductDto selectProductDetail(ProductDto dto);
 
     public List<ProductDto> selectPopularProductList();
+    
+    public List<ProductDto> selectNewProductList();
 }

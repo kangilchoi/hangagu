@@ -79,5 +79,12 @@ public class ProductController {
         ResultDto resultDto = productService.findPopularList();
         return resultDto;
     }
+    
+    @RequestMapping(value = {"new/list"}, method = RequestMethod.GET)
+    public @ResponseBody
+    ResultDto getNewList() {
+        ResultDto resultDto = productService.findNewList();
+        return resultDto;
+    }
 
 }

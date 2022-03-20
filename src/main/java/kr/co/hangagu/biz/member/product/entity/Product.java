@@ -36,9 +36,18 @@ public class Product {
 
     @Column(name = "PM_PRICE")
     private String pmPrice;
+    
+    @Column(name = "PM_DELIVERY_PRICE")
+    private String pmDeliveryPrice;
+    
+    @Column(name = "PM_SALES_RATE")
+    private String pmSalesRate;
 
     @Column(name = "PM_REMARK")
     private String pmRemark;
+    
+    @Column(name = "PM_IMG_SRC")
+    private String pmImgSrc;
 
     @Column(name = "REG_DT")
     private String regDt;
@@ -135,7 +144,23 @@ public class Product {
         this.pmPrice = pmPrice;
     }
 
-    public String getPmRemark() {
+    public String getPmDeliveryPrice() {
+		return pmDeliveryPrice;
+	}
+
+	public void setPmDeliveryPrice(String pmDeliveryPrice) {
+		this.pmDeliveryPrice = pmDeliveryPrice;
+	}
+
+	public String getPmSalesRate() {
+		return pmSalesRate;
+	}
+
+	public void setPmSalesRate(String pmSalesRate) {
+		this.pmSalesRate = pmSalesRate;
+	}
+
+	public String getPmRemark() {
         return pmRemark;
     }
 
@@ -143,7 +168,15 @@ public class Product {
         this.pmRemark = pmRemark;
     }
 
-    public String getRegDt() {
+    public String getPmImgSrc() {
+		return pmImgSrc;
+	}
+
+	public void setPmImgSrc(String pmImgSrc) {
+		this.pmImgSrc = pmImgSrc;
+	}
+
+	public String getRegDt() {
         return regDt;
     }
 

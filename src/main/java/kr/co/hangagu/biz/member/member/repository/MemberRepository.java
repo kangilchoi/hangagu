@@ -44,8 +44,8 @@ public class MemberRepository extends QuerydslRepositorySupport{
     	
     	MemberVo result = queryFactory
 			.select(Projections.bean(MemberVo.class
-					,m.memClassCd,m.memId,m.memPw,m.memNm,m.memBirth
-					,m.memAddr,m.memDetailAddr,m.memPhone,m.memTel,m.memMail
+					,m.memKey,m.memClassCd,m.memId,m.memPw,m.memNm,m.memBirth
+					,m.memAddr,m.memDetailAddr,m.memPhone,m.memTel,m.memMail,m.memPost
 					,m.memMailReceptYn,m.memArea,m.memGrade,m.regDt,m.modDt,m.deleteYn))
 			.from(m)
 			.where(

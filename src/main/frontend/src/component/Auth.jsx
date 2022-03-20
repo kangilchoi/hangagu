@@ -16,6 +16,11 @@ export function getLoggedInUserName(){
     return user;
 }
 
+export async function getLoggedInMemKey() {
+    return await axios.get('/member/getMember/'+getLoggedInUserName()).then(res=> res.data.data.memKey );
+
+}
+
 export function createJWTToken(token){
     return 'Bearer ' + token
 }

@@ -17,5 +17,7 @@ public interface ProductService {
     public ResultDto update(ProductDto dto);
 
     public ResultDto findPopularList();
+    
+    public ResultDto findNewList();
 
 }

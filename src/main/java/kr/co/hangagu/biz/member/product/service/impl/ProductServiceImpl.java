@@ -116,4 +116,14 @@ public class ProductServiceImpl implements ProductService {
         resultDto.setData(result);
         return resultDto;
     }
+    
+    @Override
+    public ResultDto findNewList() {
+        ResultDto resultDto = new ResultDto();
+
+        List<ProductDto> result = productRepository.selectNewProductList();
+
+        resultDto.setData(result);
+        return resultDto;
+    }
 }

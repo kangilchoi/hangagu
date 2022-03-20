@@ -21,6 +21,18 @@ import Qna from "component/community/write/Qna"
 import Header from 'component/Header';
 import Footer from 'component/Footer';
 
+import AddOrderComponent from 'component/order/AddOrderComponent';
+import ListOrderComponent from 'component/order/ListOrderComponent';
+import ListOrderRMComponent from 'component/order/ListOrderRMComponent';
+import CompleteOrderComponent from 'component/order/CompleteOrderComponent';
+
+import ListCartComponent from 'component/cart/ListCartComponent';
+
+import ListWishComponent from 'component/wishList/ListWishComponent';
+
+import ListAddrComponent from 'component/addr/ListAddrComponent';
+import AddAddrComponent from 'component/addr/AddAddrComponent';
+
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
@@ -49,6 +61,16 @@ function App() {
         <Route exact path="/community/Qa" component={Qa} />
         <Route exact path="/community/QaDetail/:bdKey" component={QaDetail} />
         <Route exact path="/community/write/Qna" component={Qna} />
+        <Route path = "/login/join" component={Join} />
+        <Route path = "/" exact component = {Main}></Route>
+		<Route path = "/order/get" component = {ListOrderComponent}></Route>
+		<Route path = "/order/getrm" component = {ListOrderRMComponent}></Route>
+		<Route path = "/order/addView" component = {AddOrderComponent}></Route>
+		<Route path = "/order/orderResult" component = {CompleteOrderComponent}></Route>
+		<Route path = "/cart/get" component = {ListCartComponent}></Route>
+		<Route path = "/interestProduct/get" component = {ListWishComponent}></Route>
+		<Route path = "/addr/get" component = {ListAddrComponent}></Route>
+		<Route path = "/addr/addView" component = {AddAddrComponent}></Route>
       </main>
       <Footer>
 		</Footer>
