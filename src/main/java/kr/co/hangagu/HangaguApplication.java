@@ -14,6 +14,7 @@ public class HangaguApplication {
 		SpringApplication.run(HangaguApplication.class, args);
 	}
 	
+	
 	@Bean
 	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
 		return new HiddenHttpMethodFilter();
